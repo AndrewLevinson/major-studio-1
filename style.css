@@ -1,3 +1,20 @@
 body {
-  background: #3d3d3d;
+  background-color: #f8efe7;
+  font-family: monospace;
+}
+.container {
+  width: 70%;
+  margin: auto;
+}
+
+a {
+  color: #77b6eb;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+a:hover {
+  text-decoration: underline;
+  font-weight: 600;
+  color: #3d3d3d;
 }

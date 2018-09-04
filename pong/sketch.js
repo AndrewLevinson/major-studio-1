@@ -155,8 +155,8 @@ function draw() {
     if (score > highScore) {
       highScore = score;
     }
-    // removes canvas when game ends to stop continuous draw function always running
-    remove();
+    // removes canvas when game ends to stop continuous draw function always running during development
+    // remove();
   }
 }
 
