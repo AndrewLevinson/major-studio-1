@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Randomizer</title>
+</head>
+
+
+<body>
+
+    <style>
+        html {
+            font-family: monospace;
+            color: #3d3d3d;
+
+        }
+
+        button {
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+    </style>
+
+    <h1>Random Student Teams</h1>
+    <button onclick="randomize()">Randomize</button>
+    <ul>
+        <li id="stuff1"></li>
+        <li id="stuff2"></li>
+        <li id="stuff3"></li>
+    </ul>
+
+    <script>
+        function randomize() {
+            const students = ["Alonso", "Aaditi", "Batool", "Stephanie", "Simone", "Andrew", "Felix", "Mikaela", "Candace", "Michael"];
+            const readings = [];
+            readings.push("Kurgan, Laura (2013). Close up at a Distance: Mapping, Technology, and Politics.", "Crawford, Kate (2016), Can an Algorithm be Agonistic? Ten Scenes from Life in Calculated Publics.", "Manovich, Lev (2017). Cultural Data: Possibilities and Limitations of Digitized Archives.")
+            const assignment = [];
+            const wildcard = Math.floor(Math.random() * assignment.length);
+
+            for (var i = 0; i < readings.length; i++) {
+                assignment[i] = {
+                    report: readings[i],
+                    team: []
+                }
+            }
+
+            for (var i in assignment) {
+                while (assignment[i].team.length < 3) {
+                    let rnd = Math.floor(Math.random() * students.length);
+                    assignment[i].team.push(students[rnd]);
+                    students.splice(rnd, 1);
+                }
+            }
+
+            assignment[wildcard].team.push(students[0]);
+
+            console.log(assignment[0].team);
+            console.log(assignment[1].team);
+            console.log(assignment[2].team);
+
+
+            document.getElementById("stuff1").innerHTML = assignment[0].team;
+            document.getElementById("stuff2").innerHTML = assignment[1].team;
+            document.getElementById("stuff3").innerHTML = assignment[2].team;
+
+
+        }
+    </script>
+
+</body>
+
+</html>

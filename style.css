@@ -3,12 +3,26 @@ body {
   font-family: monospace;
 }
 .container {
-  width: 70%;
+  width: 80%;
   margin: auto;
+  margin-top: 150px;
+}
+
+@media (max-width: 401px) {
+  .container {
+    width: 95%;
+    text-align: left;
+    margin-top: 10%;
+  }
+}
+
+h1 {
+  font-weight: 300;
+  line-height: 0;
 }
 
 a {
-  color: #77b6eb;
+  color: #5863f8;
   text-decoration: none;
   font-size: 16px;
 }
@@ -17,4 +31,15 @@ a:hover {
   text-decoration: underline;
   font-weight: 600;
   color: #222;
+}
+
+ol {
+  margin-left: 1px;
+  padding-left: 0px;
+  list-style-position: inside;
+}
+
+.note {
+  margin-top: 5%;
+  text-transform: uppercase;
 }
