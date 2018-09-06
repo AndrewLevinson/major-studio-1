@@ -1,20 +1,25 @@
-let speedX, speedY, level, paddleSize;
-let color = "#3A7279";
-let score = 0;
-let highScore = 0;
 let canvasX = innerWidth * 0.8;
 let canvasY = innerHeight * 0.8;
-let balls = [];
+let speedX = [];
+let speedY = [];
+let ballX = [];
+let ballY = [];
+let level, paddleSize, score;
+let color = "#3A7279";
+let highScore = 0;
+let quantity = 10;
 
 function setup() {
   canvas = createCanvas(canvasX, canvasY);
   canvas.parent("sketch-holder");
   score = 0;
   // establish ball starting position and speed
-  ballX = random(490);
-  ballY = random(400);
-  speedX = -6;
-  speedY = -6;
+  for (var i = 0; i < quantity; i++) {
+    ballX[i] = random(490);
+    ballY[i] = random(400);
+    speedX[i] = -6;
+    speedY[i] = -6;
+  }
   // establish starting paddle w x h
   paddleWidth = 150;
   paddleHeight = 15;
@@ -24,41 +29,87 @@ function draw() {
   background("#3d3d3d");
 
   // create moving ball that stays within play
-  fill("#EAC771");
-  noStroke();
-  ellipse(ballX, ballY, 30, 30);
-  ballX = ballX + speedX;
-  ballY = ballY + speedY;
-  if (ballX >= canvasX - 15 || ballX <= 15) {
-    speedX *= -1;
-  }
-  if (ballY <= 15) {
-    speedY *= -1;
-  }
-
   // create paddle
   fill("#fff");
   noStroke();
   rect(mouseX, windowHeight * 0.725, paddleWidth, paddleHeight, 20);
 
-  // handle ball to paddle contact
-  if (
-    ballX > mouseX &&
-    ballX < mouseX + paddleWidth &&
-    ballY + 15 >= windowHeight * 0.75 - 15 &&
-    ballY < canvasY
-  ) {
-    speedY *= -1;
-    score++;
-    balls.push(ellipse(ballX, ballY, 30, 30));
-    console.log(balls);
+  for (var i = 0; i < quantity; i++) {
+    fill("#EAC771");
+    noStroke();
+    ellipse(ballX[i], ballY[i], 30, 30);
+    ballX[i] = ballX[i] + speedX[i];
+    ballY[i] = ballY[i] + speedY[i];
 
-    // make more difficult as you level up
-    if (level == "INTERMEDIATE") {
-      speedY = -8;
+    if (ballX[i] >= canvasX - 15 || ballX[i] <= 15) {
+      speedX[i] *= -1;
     }
-    if (level == "EXPERT") {
-      speedY = speedY + speedY * 0.05;
+    if (ballY[i] <= 15) {
+      speedY[i] *= -1;
+    }
+
+    // handle ball to paddle contact
+    if (
+      ballX[i] > mouseX &&
+      ballX[i] < mouseX + paddleWidth &&
+      ballY[i] + 15 >= windowHeight * 0.75 - 15 &&
+      ballY[i] < canvasY
+    ) {
+      speedY[i] *= -1;
+      score++;
+
+      // make more difficult as you level up
+      if (level == "INTERMEDIATE") {
+        speedY[i] = -8;
+      }
+      if (level == "EXPERT") {
+        speedY[i] = speedY[i] + speedY[i] * 0.05;
+      }
+    }
+
+    // check if all balls are outside canvas
+    function totalLoser(ball) {
+      return ball >= canvasY;
+    }
+
+    // game over message
+    if (ballY.every(totalLoser)) {
+      fill("#fff");
+      noStroke();
+
+      textSize(40);
+      textAlign(CENTER);
+      text("Game Over", canvasX / 2, (windowHeight * 0.65) / 2);
+
+      fill(color);
+      if (level == "BEGINNER") {
+        rect(canvasX / 2 + 13, canvasY / 2 - 15, 92, 20, 4);
+      } else if (level == "INTERMEDIATE") {
+        rect(canvasX / 2 - 6, canvasY / 2 - 15, 128, 20, 4);
+      } else {
+        rect(canvasX / 2 + 21, canvasY / 2 - 15, 75, 20, 4);
+      }
+
+      textSize(16);
+      fill("#fff");
+      text("Your level: " + level, canvasX / 2, canvasY / 2);
+
+      text(
+        "But you can do better than " + score + " points...",
+        canvasX / 2,
+        canvasY / 1.8
+      );
+
+      textSize(18);
+      fill("#f65856");
+      text("CLICK TO PLAY AGAIN", mouseX, mouseY - 15);
+
+      // set highscore
+      if (score > highScore) {
+        highScore = score;
+      }
+      // removes canvas when game ends to stop continuous draw function always running during development
+      // remove();
     }
   }
 
@@ -118,46 +169,6 @@ function draw() {
   // speed level 1
   fill("#1DD3B0");
   rect(canvasX - 46, 16, 6, 18, 4);
-
-  // game over message
-  if (ballY >= canvasY) {
-    fill("#fff");
-    noStroke();
-
-    textSize(40);
-    textAlign(CENTER);
-    text("Game Over", canvasX / 2, (windowHeight * 0.65) / 2);
-
-    fill(color);
-    if (level == "BEGINNER") {
-      rect(canvasX / 2 + 13, canvasY / 2 - 15, 92, 20, 4);
-    } else if (level == "INTERMEDIATE") {
-      rect(canvasX / 2 - 6, canvasY / 2 - 15, 128, 20, 4);
-    } else {
-      rect(canvasX / 2 + 21, canvasY / 2 - 15, 75, 20, 4);
-    }
-
-    textSize(16);
-    fill("#fff");
-    text("Your level: " + level, canvasX / 2, canvasY / 2);
-
-    text(
-      "But you can do better than " + score + " points...",
-      canvasX / 2,
-      canvasY / 1.8
-    );
-
-    textSize(18);
-    fill("#f65856");
-    text("CLICK TO PLAY AGAIN", mouseX, mouseY - 15);
-
-    // set highscore
-    if (score > highScore) {
-      highScore = score;
-    }
-    // removes canvas when game ends to stop continuous draw function always running during development
-    // remove();
-  }
 }
 
 function mouseReleased() {
