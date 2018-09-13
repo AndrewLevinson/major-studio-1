@@ -1,40 +1,52 @@
-let dictionary = [];
-let counts = {};
+var dictionary = [];
+var textX = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background("pink");
   loadStrings("sotu-t-1.txt", callback);
+  display();
+}
+
+function display() {
+  background("lightgray");
+  translate(textX, 0);
+  push();
+  for (var i = 0; i < dictionary.length; i++) {
+    textSize(dictionary[i].count);
+    var txtWidth = textWidth(dictionary[i].word);
+    text(dictionary[i].word, 0, height / 2);
+    translate(txtWidth, 0);
+  }
+  pop();
+}
+// dragging option
+function mouseDragged() {
+  display();
+  textX = mouseX - pmouseX;
+}
+
+// scrolling option
+function mouseWheel(event) {
+  display();
+  print(event.delta);
+  textX = -event.delta;
 }
 
 function callback(sotu) {
-  sotu.forEach(phrases => {
-    let words = phrases.split(" ");
-    let filteredWords = words.filter(function(element) {
-      return element !== "";
-    });
-    filteredWords.forEach(word => {
+  sotu.forEach(function(phrases) {
+    var words = phrases.split(" ");
+    words.forEach(function(word) {
       word = word.toLowerCase();
-      counts[word] = counts[word] ? counts[word] + 1 : 1;
-      dictionary.push({ word: word, count: counts[word] });
+      let filteredWords = dictionary.filter(el => {
+        return el.word == word;
+      });
+      if (filteredWords.length) {
+        filteredWords[0].count++;
+      } else {
+        dictionary.push({ word: word, count: 1 });
+      }
     });
   });
-
-  function compare(a, b) {
-    let comparison = 0;
-    if (a.count > b.count) {
-      comparison = 1;
-    } else if (a.count < b.count) {
-      comparison = -1;
-    }
-    return comparison * -1;
-  }
-
-  // console.log(dictionary.sort(compare));
-
-  for (var i = 0; i < dictionary.length; i++) {
-    if (dictionary[i].count > 1) {
-      console.log(dictionary.sort(compare)[i].count);
-    }
-  }
+  console.log(dictionary);
 }
