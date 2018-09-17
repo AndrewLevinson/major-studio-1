@@ -17,6 +17,7 @@ body {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 10px;
+  margin-bottom: 50px;
 }
 
 canvas {
@@ -28,4 +29,71 @@ canvas {
   overflow: auto;
   border-radius: 10px;
   filter: drop-shadow(0px 8px 16px #333);
+}
+
+.form {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+}
+
+.warning {
+  visibility: hidden;
+  margin: 0px 0px 0px 20px;
+  font-size: 12px;
+  color: #6c6c6c;
+}
+
+.active {
+  visibility: visible;
+}
+
+.user-input h5 {
+  line-height: 0;
+  margin-bottom: 16px;
+}
+
+input {
+  height: 30px;
+  width: 250px;
+  padding: 6px 0px;
+  box-shadow: none;
+  box-sizing: border-box;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #979797;
+  font-family: monospace;
+}
+
+input:focus {
+  outline: 0;
+  border-bottom: 1px solid #6c6c6c;
+}
+
+button {
+  display: inline-block;
+  height: 26px;
+  padding: 0 40px;
+  color: #31343c;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1px solid #979797;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-family: monospace;
+  margin-left: 20px;
+}
+
+button:hover {
+  color: #ffffff;
+  background: #6c6c6c;
+  border: 1px solid #6c6c6c;
 }

@@ -18,8 +18,16 @@
             <h1>Word Frequencies UNDP</h1>
             <h4>SDG 8: Decent Work and Economic Growth</h4>
         </div>
-        <input type="text" placeholder="enter term" style="margin-bottom: 20px" id="add">
-        <button onclick="addWord()">Add</button>
+        <div class="user-input">
+            <h5>See how other words compare to the top 20 words in SDG 8</h5>
+            <div class="form">
+                <form onsubmit="return false">
+                    <input type="text" placeholder="Search Word" id="add">
+                    <button type="submit" value="Submit" onclick="addWord()">Add</button>
+                </form>
+                <p class="warning">default</p>
+            </div>
+        </div>
         <div id="sketch-holder">
             <!-- P5.js canvas goes here -->
         </div>
