@@ -4,14 +4,26 @@
     <link rel="stylesheet" href="style.css">
     <!--p5 minified-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+
     <!--p5 DOM minified-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
     <!--JS code-->
+    <script src="multiFilter.js"></script>
     <script src="sketch.js"></script>
 </head>
 
 <body>
-
+    <div class="container">
+        <div class="title">
+            <h1>Word Frequencies UNDP</h1>
+            <h4>SDG 8: Decent Work and Economic Growth</h4>
+        </div>
+        <input type="text" placeholder="enter term" style="margin-bottom: 20px" id="add">
+        <button onclick="addWord()">Add</button>
+        <div id="sketch-holder">
+            <!-- P5.js canvas goes here -->
+        </div>
+    </div>
 </body>
 
 </html>
