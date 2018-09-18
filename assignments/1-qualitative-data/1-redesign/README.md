@@ -22,7 +22,7 @@
 
 Next Steps
 
-    - If I were to take this farther, I might experiment with typography a little more, especially with the sections themselves. How to better show the statistics and data?
-    - Interactivity: I started playing around with what else would be possible if this graphic lived on the web and how users could interact with the map. See this example to show what happens when hovering over a country to see its tooltip.
+- If I were to take this farther, I might experiment with typography a little more, especially with the sections themselves. How to better show the statistics and data?
+- Interactivity: I started playing around with what else would be possible if this graphic lived on the web and how users could interact with the map. See this example to show what happens when hovering over a country to see its tooltip.
 
-    ![Interactive Map](interactive-redesign.png "Interactive Map")
+![Interactive Map](interactive-redesign.png "Interactive Map")
