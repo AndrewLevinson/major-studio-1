@@ -25,12 +25,18 @@ img {
 .title {
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 10px;
+  letter-spacing: 8px;
   margin-bottom: 50px;
 }
 
-.notes {
-  margin-top: 180px;
-  margin-left: 20px;
-  width: 80%;
+a {
+  color: #3d3d3d;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+a:hover {
+  text-decoration: underline;
+  font-weight: 600;
+  color: #7c92f7;
 }
