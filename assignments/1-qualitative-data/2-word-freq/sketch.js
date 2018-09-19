@@ -3,7 +3,7 @@ let growBar = 0;
 let growMax;
 let myText;
 let canvasX = innerWidth * 0.8;
-let canvasY = innerHeight * 0.6;
+let canvasY = 420;
 
 // the value of each key is an array with the values to filter
 let filters = {
