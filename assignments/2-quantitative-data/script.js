@@ -41,8 +41,7 @@ d3.csv("data/revised2015.csv", d => {
 
 // global variables
 let margin = 50;
-let marginBottom = 125;
-let marginTop = 0;
+let marginBottom = 150;
 let height = window.innerHeight - marginBottom;
 let width = window.innerWidth - margin;
 
