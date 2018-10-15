@@ -4,6 +4,8 @@
 // 3. Line chart to compare country or region to world's access to energy
 // https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS?end=2016&locations=ZG-1W&name_desc=false&start=1990&type=shaded&view=chart
 
+// Below is idea #1
+
 // tried to parse full data set but couldnt figure ut out. Used revised cvs below
 // d3.csv("data/SE4ALL_csv/SE4ALLData.csv", d => {
 //   return {
@@ -31,37 +33,67 @@ d3.csv("data/revised2015.csv", d => {
   };
 }).then(d => {
   data = d.filter(d => {
-    return d.totalOutput > 100;
+    return d.totalOutput > 200000;
   });
   console.log(data);
   svg(data);
 });
 
-// globals
-let margin = 100;
-let height = window.innerHeight - margin;
+// global variables
+let margin = 50;
+let marginBottom = 125;
+let marginTop = 0;
+let height = window.innerHeight - marginBottom;
 let width = window.innerWidth - margin;
 
 let svg = data => {
-  // linear scale
+  // linear scale x
   let x = d3
     .scaleLinear()
     .domain([0, 6000000])
     .range([margin, width]);
 
+  // linear scale y
   let y = d3
     .scaleLinear()
     .domain([0, 80])
     .range([height, margin]);
 
   let graph = d3
-    .select("body")
+    .select(".container")
     .append("svg")
     .attr("width", window.innerWidth)
     .attr("height", window.innerHeight);
 
-  let modal = graph.append("g").attr("id", "modal");
+  // title
+  // let title = graph
+  //   .append("g")
+  //   .attr("id", "title")
+  //   .append("text")
+  //   .text("Total Electricty Output (GWh) to Renewable Energy Share (%), 2015")
+  //   .style("text-anchor", "end")
+  //   .attr("x", width)
+  //   .attr("y", margin + 5);
 
+  // x axis title
+  let xAxisTitle = graph
+    .append("g")
+    .attr("id", "xAxisTitle")
+    .append("text")
+    .text("Total electricity output (GWh)")
+    .attr("x", width - 230)
+    .attr("y", height - 10);
+
+  // y axis title
+  let yAxisTitle = graph
+    .append("g")
+    .attr("id", "yAxisTitle")
+    .append("text")
+    .text("Renewable Energy share (%)")
+    .attr("x", margin + 10)
+    .attr("y", margin + 5);
+
+  // add scatter points and mouseover
   let group = graph.append("g").attr("id", "group");
 
   let point = group
@@ -69,29 +101,30 @@ let svg = data => {
     .data(data)
     .enter()
     .append("g")
-    // .attr("transform", (d, i) => {
-    //   // return 'translate('+(i * window.innerWidth/data.length)+', 0)'; // i * window.innerWidth/data.length
-    //   return `translate(${(i * window.innerWidth) / data.length}, 0)`; // i * window.innerWidth/data.length
-    // })
+    .attr("class", "up")
     .on("mouseover", function() {
+      d3.select("#group")
+        .selectAll("g")
+        .attr("class", "inactive");
+      d3.select(this).attr("class", "active");
       d3.select(this)
         .select("text")
         .text(d => {
-          return `(${d.totalOutput}, ${Math.floor(d.renewablePercent)}%)`;
+          return `${d.country} (${d.totalOutput} GWh, ${Math.floor(
+            d.renewablePercent
+          )}%)`;
         });
-      d3.select(this)
-        .select("#output")
-        .style("fill", "gray");
     })
+
     .on("mouseout", function() {
+      d3.select("#group")
+        .selectAll("g")
+        .attr("class", "up");
       d3.select(this)
         .select("text")
         .text(d => {
           return d.country;
         });
-      d3.select(this)
-        .select("#output")
-        .style("fill", "black");
     });
 
   // visual plot points
@@ -103,56 +136,31 @@ let svg = data => {
     .attr("cx", d => {
       return x(d.totalOutput);
     })
-    .attr("r", 8)
+    .attr("r", 4)
     .attr("id", "output");
 
   // text labels on points
   point
     .append("text")
     .text(d => {
-      return "\uf118";
+      return d.country;
     })
     .attr("x", d => {
-      return x(d.totalOutput) - 20;
+      return x(d.totalOutput) + 8;
     })
     .attr("y", d => {
-      return y(d.renewablePercent) + 20;
+      return y(d.renewablePercent) + 4;
     });
-  // .attr("transform", (d, i) => {
-  //   return `translate(0, ${window.innerHeight -
-  //     d.operatingExpenses * 0.000002}) rotate(0) scale(1)`; // i * window.innerWidth/data.length
-  // });
 
+  // Axis ticks
   let xAxis = g =>
-    g
-      .attr("transform", `translate(0,${height + 50})`)
-      .call(d3.axisBottom(x))
-      .call(g => g.select(".domain").remove())
-      .call(g =>
-        g
-          .append("text")
-          .attr("x", width)
-          .attr("y", -4)
-          .attr("fill", "#000")
-          .attr("font-weight", "bold")
-          .attr("text-anchor", "end")
-          .text(data.x)
-      );
+    g.attr("transform", `translate(0,${height})`).call(d3.axisBottom(x));
 
   let yAxis = g =>
     g
       .attr("transform", `translate(${margin},0)`)
       .call(d3.axisLeft(y))
-      .call(g => g.select(".domain").remove())
-      .call(g =>
-        g
-          .select(".tick:last-of-type text")
-          .clone()
-          .attr("x", 4)
-          .attr("text-anchor", "start")
-          .attr("font-weight", "bold")
-          .text(data.y)
-      );
+      .attr("id", "xAxis");
 
   graph.append("g").call(xAxis);
   graph.append("g").call(yAxis);
