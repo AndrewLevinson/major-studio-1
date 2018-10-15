@@ -17,7 +17,14 @@
     <div class="container">
         <div class="title">
             <h2>What percentage of a country's total electricity output is <span>renewable?</span></h2>
-            <h3>Countries with a Total Electricity Output of at least 200k GWh in 2015</h3>
+            <h3>Countries with a Total Electricity Output of at least <select name="chartFilter" id="chartFilter"
+                    onchange="updateChartFilter()">
+                    <option value="0">0</option>
+                    <option value="100000">100k</option>
+                    <option value="200000" selected="selected">200k</option>
+                    <option value="500000">500k</option>
+                    <option value="1000000">1MM</option>
+                </select> GWh in 2015</h3>
         </div>
     </div>
 

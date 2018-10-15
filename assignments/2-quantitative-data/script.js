@@ -24,20 +24,24 @@
 //   svg(data);
 // });
 
-d3.csv("data/revised2015.csv", d => {
-  return {
-    country: d["Country"],
-    renewablePercent: +d["4.1_SHARE.RE.IN.ELECTRICITY"],
-    totalOutput: +d["4.1.1_TOTAL.ELECTRICITY.OUTPUT"],
-    flag: d["Flag"]
-  };
-}).then(d => {
-  data = d.filter(d => {
-    return d.totalOutput > 200000;
+function updateChartFilter() {
+  d3.select("svg").remove();
+  d3.csv("data/revised2015.csv", d => {
+    return {
+      country: d["Country"],
+      renewablePercent: +d["4.1_SHARE.RE.IN.ELECTRICITY"],
+      totalOutput: +d["4.1.1_TOTAL.ELECTRICITY.OUTPUT"]
+    };
+  }).then(d => {
+    data = d.filter(d => {
+      // return d.totalOutput > 200000;
+      return d.totalOutput > document.getElementById("chartFilter").value;
+    });
+    console.log(data);
+    svg(data);
   });
-  console.log(data);
-  svg(data);
-});
+}
+updateChartFilter();
 
 // global variables
 let margin = 50;
@@ -55,7 +59,7 @@ let svg = data => {
   // linear scale y
   let y = d3
     .scaleLinear()
-    .domain([0, 80])
+    .domain([0, 100])
     .range([height, margin]);
 
   let graph = d3
