@@ -1,0 +1,200 @@
+.pattern-40 {
+  /* fill: orange; */
+  fill: url(#pattern-40);
+  background-repeat: repeat-x;
+  stroke: black;
+  /* fill: url(svg-pattern-2.svg); */
+}
+.pattern-50 {
+  /* fill: orange; */
+  fill: url(#pattern-50);
+  stroke: red;
+}
+.pattern-60 {
+  /* fill: orange; */
+  fill: url(#pattern-60);
+  stroke: green;
+}
+.pattern-70 {
+  /* fill: orange; */
+  fill: url(#pattern-70);
+  stroke: blue;
+}
+.pattern-80 {
+  /* fill: orange; */
+  fill: url(#pattern-80);
+  stroke: orange;
+}
+.pattern-90 {
+  /* fill: orange; */
+  fill: url(#pattern-90);
+  stroke: black;
+}
+.pattern-00 {
+  /* fill: orange; */
+  fill: url(#pattern-00);
+  stroke: yellow;
+}
+.pattern-10 {
+  /* fill: orange; */
+  fill: url(#pattern-10);
+  stroke: purple;
+}
+
+.invisible {
+  /* width: 1;
+  height: 1; */
+  /* width: 345px; */
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  /* margin: auto; */
+}
+
+body {
+  background: #f8efe7;
+  font-family: monospace;
+}
+.container {
+  width: 70%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 401px) {
+  .container {
+    width: 97.5%;
+  }
+}
+
+.item h2 {
+  text-align: center;
+  color: #708090;
+}
+
+pre {
+  border-radius: 6px;
+}
+
+.item {
+  /* background: #272822; */
+  border-radius: 4px;
+  margin-bottom: 10%;
+}
+
+figure {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 2.5%;
+}
+
+/* waffle style */
+
+.countries {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.usa {
+  display: flex;
+  flex-wrap: wrap;
+  width: 280px;
+}
+
+.russia {
+  display: flex;
+  flex-wrap: wrap;
+  width: 280px;
+}
+
+.others {
+  display: flex;
+  flex-wrap: wrap;
+  width: 280px;
+}
+
+.test-block {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  background-color: green;
+}
+
+.pattern-1 {
+  background-image: url(svg-pattern-1.png);
+}
+
+.four {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  background-color: green;
+}
+
+/* .usa:hover {
+  opacity: 0.2;
+} */
+/* .usa:hover div:hover a {
+  opacity: 0.5;
+} */
+/* .usa:hover div:hover a:hover {
+  opacity: 1;
+} */
+
+.four:hover,
+.five:hover {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  filter: drop-shadow(0px 0px 3px #000);
+}
+
+.five {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  background-color: blue;
+}
+
+.six {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  background-color: black;
+}
+
+.seven {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  background-color: orange;
+}
+
+.eight {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  background-color: yellow;
+}
+
+.nine {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  background-color: turquoise;
+}
+
+.twenty {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  background-color: red;
+}
+
+.twentyTen {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  background-color: purple;
+}
