@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <style>
+        div {
+            border: 2px dashed #3d3d3d;
+        }
+
+        .row>div:hover {
+            background-color: lightgray;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: pink;
+        }
+    </style>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                One of three columns
+            </div>
+            <div class="col-sm">
+                One of three columns
+            </div>
+            <div class="col-sm">
+                One of three columns
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                One of two columns
+            </div>
+            <div class="col-4">
+                One of two columns
+            </div>
+        </div>
+    </div>
+
+    <script>
+        d3.selectAll('.row > div').on('click', function () {
+            d3.select(this).classed("active", d3.select(this).classed("active") ? false : true)
+        })
+    </script>
+</body>
+
+</html>

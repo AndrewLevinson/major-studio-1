@@ -1,0 +1,186 @@
+/* to do:
+typography
+responsive/media queries
+variables for color */
+
+body,
+g {
+  font-family: monospace;
+  font-weight: 400;
+  background: #f8efe7;
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+span {
+  color: #009f29;
+}
+
+.full {
+  height: 100vh;
+  display: flex;
+  max-width: 40rem;
+}
+.splash {
+  justify-content: space-around;
+  text-align: center;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.explain,
+.section-3 {
+  display: flex;
+  justify-content: space-between;
+  min-height: 100vh;
+  border-top: solid 1px #3d3d3d;
+  border-bottom: solid 1px #3d3d3d;
+  padding: 2.5% 0 2.5% 0;
+  margin: auto;
+  max-width: 1200px;
+}
+
+.second-title,
+.third-title {
+  width: 340px;
+  margin-left: 50px;
+  position: sticky;
+  top: 0px;
+  background-color: #f8efe7;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.text-content {
+  width: 340px;
+  margin-left: 50px;
+  margin-top: 2.5%;
+}
+
+/* use scrolly library for this */
+.graphic {
+  height: 100vh;
+  position: sticky;
+  top: 50%;
+}
+
+p {
+  margin-bottom: 100px;
+}
+
+.stuck {
+  position: sticky;
+  top: 0;
+  background-color: #f8efe7;
+  z-index: 999;
+}
+
+/* SVGs */
+.africa-map {
+  position: sticky;
+  top: 50%;
+  height: 50vh;
+}
+
+.title {
+  /* for graph alignment */
+  margin-left: 30px;
+}
+
+.title h2 {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 3px;
+  line-height: 1.2;
+}
+
+.title h3 {
+  margin-top: -8px;
+  opacity: 0.9;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+select,
+button {
+  font-size: 15px;
+  font-family: "IBM Plex Mono", monospace;
+  text-transform: uppercase;
+  background: transparent;
+  border-radius: 2px;
+  width: 80px;
+  transition: all 0.2s;
+}
+
+select:hover,
+button:hover {
+  background-color: #3d3d3d;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s;
+}
+
+#xAxisTitle,
+#yAxisTitle,
+#title {
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+#group g {
+  cursor: pointer;
+}
+
+/* SCATTER PLOT POINT STYLE BELOW */
+/* default state points: up */
+.up circle {
+  opacity: 1;
+  fill: none;
+  stroke: #000;
+  transition: all 0.6s;
+}
+.up text {
+  fill: #000;
+  font-size: 100%;
+  opacity: 0.85;
+  transition: all 0.6s;
+}
+
+/* reduced focus: inactive  */
+.inactive circle {
+  opacity: 0.2;
+  r: 4;
+  fill: none;
+  stroke: #000;
+  transition: all 0.6s;
+}
+.inactive text {
+  fill: #000;
+  font-size: 95%;
+  opacity: 0.25;
+  transition: all 0.6s;
+}
+
+/* hover on point: active */
+.active circle {
+  fill: #ff7233;
+  stroke: none;
+  r: 5;
+  opacity: 1;
+  transition: all 0.6s;
+}
+.active text {
+  fill: #000;
+  font-size: 110%;
+  opacity: 1;
+  transition: all 0.6s;
+}

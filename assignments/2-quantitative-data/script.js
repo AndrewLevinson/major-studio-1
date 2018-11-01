@@ -6,7 +6,7 @@
 
 // Below is idea #1
 
-// tried to parse full data set but couldnt figure ut out. Used revised cvs below
+// tried to parse full data set but couldnt figure it out. Used revised csv below
 // d3.csv("data/SE4ALL_csv/SE4ALLData.csv", d => {
 //   return {
 //     country: d["Country Name"],

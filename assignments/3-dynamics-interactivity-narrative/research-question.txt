@@ -1,0 +1,24 @@
+Focus on SDG 8
+General exploration -- How can acting on renewable energy potential improve the ease of doing business in Sub-Saharan Africa?
+
+Prompt
+I'm visualizing access to electricity in Sub-Saharan countries that have a poor ease of doing business ranking because I want to show how access to electricity greatly impacts the ability to do business in order to promote action on renewable energy potential to improve the ease of doing business
+
+
+Sources
+SDG 8
+https://sustainabledevelopment.un.org/sdg8
+World Bank
+http://databank.worldbank.org/data/source/doing-business/Type/TABLE/preview/on
+https://data.worldbank.org/indicator/IC.BUS.EASE.XQ?end=2017&locations=TD-AO-UG-KE&start=2017&type=shaded&view=bar
+https://datacatalog.worldbank.org/dataset/doing-business
+http://databank.worldbank.org/data/source/doing-business/Type/TABLE/preview/on
+
+Doing business
+https://en.wikipedia.org/wiki/Ease_of_doing_business_index
+http://www.doingbusiness.org/en/data/exploretopics/getting-electricity/why-matters
+http://www.doingbusiness.org/en/rankings?region=sub-saharan-africa
+http://www.doingbusiness.org/en/data/exploretopics/getting-electricity
+
+Potential Renewable energy
+http://www.irena.org/-/media/Files/IRENA/Agency/Publication/2014/IRENA_Africa_Resource_Potential_Aug2014.pdf
