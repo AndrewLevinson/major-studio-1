@@ -3,6 +3,10 @@ typography
 responsive/media queries
 variables for color */
 
+.container-1 svg {
+  background-color: #ccc;
+}
+
 body,
 g {
   font-family: monospace;
@@ -10,6 +14,7 @@ g {
   background: #f8efe7;
   margin: 0;
 }
+
 h1,
 h2,
 h3,
@@ -19,60 +24,36 @@ h6 {
   font-family: "IBM Plex Mono", monospace;
 }
 
+p,
+ul,
+li {
+  font-size: 18px;
+  line-height: 1.3;
+  font-family: "Rubik", sans-serif;
+  color: #3d3d3d;
+}
+
+.sub-header {
+  border-bottom: 1px dashed #3d3d3d;
+  /* margin-top: 20px; */
+}
+
 span {
   color: #009f29;
 }
 
-.full {
+.splash {
   height: 100vh;
   display: flex;
   max-width: 40rem;
-}
-.splash {
   justify-content: space-around;
   text-align: center;
   margin: 0 auto;
   align-items: center;
 }
 
-.explain,
-.section-3 {
-  display: flex;
-  justify-content: space-between;
-  min-height: 100vh;
-  border-top: solid 1px #3d3d3d;
-  border-bottom: solid 1px #3d3d3d;
-  padding: 2.5% 0 2.5% 0;
-  margin: auto;
-  max-width: 1200px;
-}
-
-.second-title,
-.third-title {
-  width: 340px;
-  margin-left: 50px;
-  position: sticky;
-  top: 0px;
-  background-color: #f8efe7;
-  margin-top: 60px;
-  margin-bottom: 60px;
-}
-
 .text-content {
-  width: 340px;
-  margin-left: 50px;
-  margin-top: 2.5%;
-}
-
-/* use scrolly library for this */
-.graphic {
-  height: 100vh;
-  position: sticky;
-  top: 50%;
-}
-
-p {
-  margin-bottom: 100px;
+  margin-top: 60%;
 }
 
 .stuck {
@@ -80,18 +61,64 @@ p {
   top: 0;
   background-color: #f8efe7;
   z-index: 999;
+  opacity: 1;
 }
 
-/* SVGs */
-.africa-map {
+/* scroll library */
+#sections > div {
+  opacity: 0.3;
+}
+
+#sections div.graph-scroll-active {
+  opacity: 1;
+}
+
+#container {
+  position: relative;
+}
+
+#graph {
+  /* margin-left: 40px; */
+  width: 35%;
+  margin-left: 5%;
   position: sticky;
-  top: 50%;
-  height: 50vh;
+  top: 2.5%;
+  float: left;
+  /* transform: translate(0%, 0%); */
+}
+#sections {
+  width: 35%;
+  margin-left: 55%;
+  padding-top: 0;
+}
+.final {
+  height: 20%;
+  margin-bottom: 50%;
+  visibility: hidden;
+}
+.last {
+  margin-bottom: 80%;
 }
 
-.title {
-  /* for graph alignment */
-  margin-left: 30px;
+@media (max-width: 925px) {
+  #graph {
+    width: 95%;
+    margin-left: 5%;
+    transform: translate(0%, 51%);
+    background-color: #f8efe7;
+    z-index: 999;
+  }
+
+  #sections {
+    position: relative;
+    margin: 0px auto;
+    padding-top: 10%;
+    width: 75%;
+  }
+
+  .final {
+    height: 100px;
+  }
 }
 
 .title h2 {
@@ -128,6 +155,7 @@ button:hover {
   transition: all 0.2s;
 }
 
+/* d3 attributes below  */
 #xAxisTitle,
 #yAxisTitle,
 #title {
@@ -165,8 +193,24 @@ button:hover {
 }
 .inactive text {
   fill: #000;
-  font-size: 95%;
+  /* font-size: 95%; */
+  font-size: 40%;
   opacity: 0.25;
+  transition: all 0.6s;
+}
+
+/* hidden focus: hidden  */
+.hidden circle {
+  opacity: 0;
+  r: 4;
+  fill: none;
+  stroke: #000;
+  transition: all 0.6s;
+}
+.hidden text {
+  fill: #000;
+  font-size: 0%;
+  opacity: 0;
   transition: all 0.6s;
 }
 
@@ -183,4 +227,34 @@ button:hover {
   font-size: 110%;
   opacity: 1;
   transition: all 0.6s;
+}
+
+/* map style */
+#map {
+  width: 110%;
+  height: 90vh;
+  border-radius: 10px;
+}
+
+#map svg {
+  position: absolute;
+}
+
+.hide-map {
+  display: none;
+  /* opacity: 0; */
+  /* transition: all 0.6s; */
+}
+ul {
+  list-style: none;
+  margin-bottom: 5%;
+}
+
+li::before {
+  content: "•";
+  color: #ff7233;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  font-size: 2em;
 }

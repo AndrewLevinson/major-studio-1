@@ -1,76 +1,105 @@
-// Ideas
-// 1. Scatterplot of x (raw GWH energy used) y (% of renewable energy thats from renewable)
-// 2. Bar chart x (top ten energy heavy counties) y (total energy consumption) and bars show portion that's from renewable
-// 3. Line chart to compare country or region to world's access to energy
-// https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS?end=2016&locations=ZG-1W&name_desc=false&start=1990&type=shaded&view=chart
+// to do
+// section 1 graphics
+// section 1 text
+// section 3 graphic
+// section 3 text
+// responsive and better typography
+// revise color palette
+// edit writing
+// revise interactivity/animation
+// solve for overplotting
+// footnotes and data sources
+// data gutcheck
 
-// Below is idea #1
-
-// tried to parse full data set but couldnt figure it out. Used revised csv below
-// d3.csv("data/SE4ALL_csv/SE4ALLData.csv", d => {
-//   return {
-//     country: d["Country Name"],
-//     value: +d["2015"], // convert "2015" column to number
-//     indicator: d["Indicator Code"]
-//   };
-// }).then(d => {
-//   data = d.filter(d => {
-//     return (
-//       d.indicator == "4.1_SHARE.RE.IN.ELECTRICITY" ||
-//       d.indicator == "4.1.1_TOTAL.ELECTRICITY.OUTPUT"
-//     );
-//   });
-//   console.log(data);
-//   svg(data);
-// });
-
-// data set all
-d3.csv("data/cleaned/ease_access_cost_cleaned.csv", d => {
+var data, nonCountries, subCountries, topCountries;
+// load data
+const rawData = d3.csv("data/cleaned/ease_access_cost_cleaned.csv", d => {
   return {
     country: d["Country"],
     ease: +d["Ease"],
     cost: +d["Cost"],
-    access: +d["Access"]
+    access: +d["Access"],
+    category: d["Category"]
   };
-}).then(d => {
+});
+// filter into sets
+rawData.then(d => {
   data = d.filter(d => {
     return d.ease > 0; // all
-    // return d.ease < document.getElementById("chartFilter").value;
   });
-  console.log(data);
-  svg(data, ".scatter-1");
+  // console.log(data);
 });
 
-// data set filtered
-d3.csv("data/cleaned/ease_access_cost_cleaned_filtered.csv", d => {
-  return {
-    country: d["Country"],
-    ease: +d["Ease"],
-    cost: +d["Cost"],
-    access: +d["Access"]
-  };
-}).then(d => {
-  data = d.filter(d => {
-    return d.ease > 0; // all
-    // return d.ease < document.getElementById("chartFilter").value;
+rawData.then(d => {
+  nonCountries = data.filter(d => {
+    return d.category == "non";
   });
-  console.log(data);
-
-  svg(data, ".scatter-2");
+  // console.log(nonCountries);
+});
+rawData.then(d => {
+  subCountries = data.filter(d => {
+    return d.category == "sub";
+  });
+  // console.log(subCountries);
+});
+rawData.then(d => {
+  topCountries = data.filter(d => {
+    return d.category == "top";
+  });
+  // console.log(topCountries);
+  svg(data, nonCountries, subCountries, topCountries, ".container-2 #graph");
 });
 
-// global variables
-let margin = 50;
-let marginBottom = 150;
-let height = window.innerHeight - marginBottom;
-let width = window.innerWidth - margin;
+// global svg variables
+let margin = 25;
+let marginBottom = 0;
+let marginRight = 100;
+let width, height;
 
-let svg = (data, applyTo) => {
+if (window.innerWidth < 925) {
+  width = window.innerWidth * 0.95 - margin;
+  height = window.innerHeight * 0.6;
+} else {
+  width = window.innerWidth * 0.45 - margin;
+  height = window.innerHeight * 0.9;
+}
+
+let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
+  var svg1 = d3
+    .select("#graph")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "#3d3d3d");
+
+  var colors = ["orange", "purple", "steelblue", "pink", "blue", "green"];
+  var r = [0, 40, 30, 25, 80, 130];
+  var circle = svg1
+    .append("circle")
+    .attr("cx", width / 2)
+    .attr("cy", height / 2)
+    .attr("r", r[0]);
+
+  d3.graphScroll()
+    .container(d3.select(".container-1"))
+    .graph(d3.selectAll("container-1 #graph"))
+    .eventId("uniqueId1") // namespace for scroll and resize events
+    .sections(d3.selectAll(".container-1 #sections > div"))
+    // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
+    .on("active", function(i) {
+      circle
+        .transition()
+        .duration(1000)
+        .attr("r", r[i])
+        .transition()
+        .style("fill", colors[i]);
+    });
+
   // linear scale x
   let x = d3
     .scaleLinear()
     .domain([0, 100])
-    .range([margin, width]);
+    .range([margin, width - marginRight]);
 
   // linear scale y
   let y = d3
@@ -81,8 +110,8 @@ let svg = (data, applyTo) => {
   let graph = d3
     .select(applyTo)
     .append("svg")
-    .attr("width", window.innerWidth)
-    .attr("height", window.innerHeight);
+    .attr("width", width)
+    .attr("height", height + 20);
 
   // title
   // let title = graph
@@ -100,27 +129,30 @@ let svg = (data, applyTo) => {
     .attr("id", "xAxisTitle")
     .append("text")
     .text("Access to Electricity (%)")
-    .attr("x", width - 230)
-    .attr("y", height - 10);
+    .attr("x", width - marginRight - 10)
+    .attr("y", height - 10)
+    .style("text-anchor", "end");
 
   // y axis title
   let yAxisTitle = graph
     .append("g")
     .attr("id", "yAxisTitle")
     .append("text")
-    .text("Ease of Doing Business Index (1 - 190) 1=Easiest")
+    .text("Ease of Doing Business Index (1 - 190) 1 = Easiest")
     .attr("x", margin + 10)
     .attr("y", margin + 5);
 
   // add scatter points and mouseover
   let group = graph.append("g").attr("id", "group");
 
-  let point = group
+  let points = group
     .selectAll("g")
     .data(data)
     .enter()
     .append("g")
-    .attr("class", "up")
+    .attr("class", "hidden");
+
+  points
     .on("mouseover", function() {
       d3.select("#group")
         .selectAll("g")
@@ -145,7 +177,7 @@ let svg = (data, applyTo) => {
     });
 
   // visual plot points
-  point
+  points
     .append("circle")
     .attr("cy", d => {
       return y(d.ease);
@@ -157,7 +189,7 @@ let svg = (data, applyTo) => {
     .attr("id", "output");
 
   // text labels on points
-  point
+  points
     .append("text")
     .text(d => {
       return d.country;
@@ -181,4 +213,144 @@ let svg = (data, applyTo) => {
 
   graph.append("g").call(xAxis);
   graph.append("g").call(yAxis);
+
+  d3.graphScroll()
+    .container(d3.select(".container-2"))
+    .graph(d3.selectAll(".container-2 #graph"))
+    .eventId("uniqueId2") // namespace for scroll and resize events
+    .sections(d3.selectAll(".container-2 #sections > div"))
+    // .offset(3000)
+    .on("active", function(i) {
+      if (i == 0) {
+        points.attr("class", "hidden");
+      } else if (i == 1) {
+        points.attr("class", "up");
+      } else if (i == 2) {
+        points.attr("class", "inactive");
+        points.classed("active", d => {
+          return d.access == 100 && d.ease < 100;
+        });
+      } else if (i == 3) {
+        points.attr("class", "inactive");
+        points.classed("active", d => {
+          return d.category == "sub";
+        });
+      } else if (i == 4) {
+        points.attr("class", "inactive");
+        points.classed("active", d => {
+          return d.category == "sub" && d.access < 30;
+        });
+      } else if (i == 5) {
+        points.attr("class", "inactive");
+        points.classed("active", d => {
+          // return d.category == "sub" && d.ease > 173 && d.access < 21;
+          return (
+            d.country == "South Sudan" ||
+            d.country == "Chad" ||
+            d.country == "Liberia"
+          );
+        });
+      } else {
+        points.attr("class", "up");
+      }
+    });
 };
+
+// var oldWidth = 0;
+// function render() {
+//   if (oldWidth == innerWidth) return;
+//   oldWidth = innerWidth;
+
+//   var width = (height = d3.select("#graph").node().offsetWidth);
+//   var r = 40;
+
+//   if (innerWidth <= 925) {
+//     width = innerWidth;
+//     height = innerHeight * 0.7;
+//   }
+
+//   // return console.log(width, height)
+
+//   var svg1 = d3
+//     .select("#graph")
+//     .append("svg")
+//     .attrs({ width: 500, height: 500 });
+
+//   var circle = svg.append("circle").attrs({ cx: 0, cy: 0, r: r });
+
+//   var colors = ["orange", "purple", "steelblue", "pink", "black"];
+//   var gs = d3
+//     .graphScroll()
+//     .container(d3.select(".container-1"))
+//     .graph(d3.selectAll("container-1 #graph"))
+//     .eventId("uniqueId1") // namespace for scroll and resize events
+//     .sections(d3.selectAll(".container-1 #sections > div"))
+//     // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
+//     .on("active", function(i) {
+//       var pos = [
+//         { cx: width - r, cy: r },
+//         { cx: r, cy: r },
+//         { cx: width - r, cy: height - r },
+//         { cx: width / 2, cy: height / 2 }
+//       ][i];
+
+//       circle
+//         .transition()
+//         .duration(1000)
+//         .attrs(pos)
+//         .transition()
+//         .style("fill", colors[i]);
+//     });
+
+//   var svg2 = d3
+//     .select(".container-2 #graph")
+//     .html("")
+//     .append("svg")
+//     .attrs({ width: width, height: height });
+
+//   var path = svg2.append("path");
+
+//   var gs2 = d3
+//     .graphScroll()
+//     .container(d3.select(".container-2"))
+//     .graph(d3.selectAll(".container-2 #graph"))
+//     .eventId("uniqueId2") // namespace for scroll and resize events
+//     .sections(d3.selectAll(".container-2 #sections > div"))
+//     .on("active", function(i) {
+//       var h = height;
+//       var w = width;
+//       var dArray = [
+//         [
+//           [w / 4, h / 4],
+//           [(w * 3) / 4, h / 4],
+//           [(w * 3) / 4, (h * 3) / 4],
+//           [w / 4, (h * 3) / 4]
+//         ],
+//         [
+//           [0, 0],
+//           [(w * 3) / 4, h / 4],
+//           [(w * 3) / 4, (h * 3) / 4],
+//           [w / 4, (h * 3) / 4]
+//         ],
+//         [[w / 2, h / 2], [w, h / 4], [w, h], [w / 4, h]],
+//         [[w / 2, h / 2], [w, h / 4], [w, h], [w / 4, h]],
+//         [[w / 2, h / 2], [w, h / 2], [0, 0], [w / 4, h / 2]],
+//         [[w / 2, h / 2], [0, h / 4], [0, h / 2], [w / 4, 0]]
+//       ].map(function(d) {
+//         return "M" + d.join(" L ");
+//       });
+
+//       path
+//         .transition()
+//         .duration(1000)
+//         .attr("d", dArray[i])
+//         .style("fill", colors[i]);
+//     });
+
+//   d3.select("#source").styles({
+//     "margin-bottom": window.innerHeight - 450 + "px",
+//     padding: "100px"
+//   });
+// }
+// render();
+// d3.select(window).on("resize", render);
