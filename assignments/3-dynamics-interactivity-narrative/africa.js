@@ -23,7 +23,21 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
   let transform = d3.geoTransform({ point: projectPoint }); // https://bl.ocks.org/Andrew-Reid/496078bd5e37fd22a9b43fd6be84b36b
   let path = d3.geoPath().projection(transform); // https://github.com/d3/d3-3.x-api-reference/blob/master/Geo-Paths.md
 
-  var colorScale = d3.scaleOrdinal(d3.schemeGreens[9]);
+  var colorScale = d3.scaleOrdinal(d3.schemeGreens[9]).domain([0, 33715644]);
+
+  // var colorScale = d3
+  // .scaleOrdinal(d3.schemeGreens[9])
+  // .domain([
+  //   0,
+  //   4214456,
+  //   8428911,
+  //   12643367,
+  //   16857822,
+  //   21072278,
+  //   25286733,
+  //   29501189,
+  //   33715644
+  // ]);
 
   // let colorScale = d3
   //   .scaleLinear()
@@ -48,29 +62,39 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
     .attr("d", d3.geoPath().projection(transform))
     .attr("stroke", "none")
     .attr("fill", function(d, i) {
-      return colorScale(d.properties.totaltwh / d.properties.pop_est);
+      // console.log(
+      //   d.properties.name,
+      //   Math.floor((d.properties.totaltwh * 1000000000) / d.properties.pop_est)
+      // );
+      // return colorScale(
+      //   (d.properties.totaltwh * 1000000000) / d.properties.pop_est
+      // );
+      return colorScale(d.properties.totaltwh);
     })
     .attr("fill-opacity", 0.6)
     .attr("stroke", function(d, i) {
-      if (d.properties.name == "Angola" || d.properties.name == "Chad") {
+      if (
+        d.properties.name == "Mozambique" ||
+        d.properties.name == "Chad" ||
+        d.properties.name == "Niger"
+      ) {
         return "lightgreen";
       }
     });
 
   // .on("mouseover", function(d) {
   //   console.log(d);
-  //   d3.select(this).attr("fill", "lightgreen");
+  //   // d3.select(this).attr("fill", "lightgreen");
   //   d3.select("#hover").text(
-  //     d.properties.name.toUpperCase() +
-  //       " (Population: " +
-  //       (d.properties.pop_est / 1000000).toFixed(1) +
-  //       "Mio.)"
+  //     `${d.properties.name.toUpperCase()} (${d.properties.totaltwh} TWh/year)`
   //   );
-  //   d3.select("#hover").attr("fill-opacity", 1);
-  // });
+  //   d3.select("#hover")
+  //     .attr("fill-opacity", 1)
+  //     .attr("fill", "#fff");
+  // })
   // .on("mouseout", function() {
-  //   d3.select(this).attr("fill", "lightgray");
-  //   d3.select("#hover").attr("fill-opacity", 0);
+  //   // d3.select(this).attr("fill", "lightgray");
+  //   // d3.select("#hover").attr("fill-opacity", 0);
   // })
   // .on("mousemove", function(d) {
   //   d3.select("#hover")
@@ -123,22 +147,22 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
       if (i == 1) {
         map.flyTo({
           center: [18.2812, 9.1021],
-          zoom: 2
+          zoom: 2.4
         });
       } else if (i == 2) {
         map.flyTo({
-          center: [31.307, 6.877],
-          zoom: 5
+          center: [18.7322, 15.4542],
+          zoom: 4.5
         });
       } else if (i == 3) {
         map.flyTo({
-          center: [18.7322, 15.4542],
-          zoom: 5
+          center: [8.0817, 17.6078],
+          zoom: 4.5
         });
       } else if (i == 4) {
         map.flyTo({
-          center: [-9.4295, 6.4281],
-          zoom: 6
+          center: [35.5296, -18.6657],
+          zoom: 4.5
         });
       } else {
         map.flyTo({

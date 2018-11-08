@@ -196,7 +196,7 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
     })
     .transition()
     .delay(function(d, i) {
-      return i * 60;
+      return i * 10;
     }) // <-- delay as a function of i
     .attr("r", 4)
     .attr("id", "output");
@@ -212,7 +212,7 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
     })
     .transition()
     .delay(function(d, i) {
-      return i * 60;
+      return i * 10;
     }) // <-- delay as a function of i
     .text(d => {
       return d.country;
@@ -245,7 +245,7 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
       } else if (i == 2) {
         points.attr("class", "inactive");
         points.classed("active", d => {
-          return d.access == 100 && d.ease < 100;
+          return d.access == 100 && d.ease <= 50;
         });
       } else if (i == 3) {
         points.attr("class", "inactive");
@@ -255,16 +255,16 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
       } else if (i == 4) {
         points.attr("class", "inactive");
         points.classed("active", d => {
-          return d.category == "sub" && d.access < 30;
+          return d.category == "sub" && d.access < 25;
         });
       } else if (i == 5) {
         points.attr("class", "inactive");
         points.classed("active", d => {
           // return d.category == "sub" && d.ease > 173 && d.access < 21;
           return (
-            d.country == "South Sudan" ||
             d.country == "Chad" ||
-            d.country == "Liberia"
+            d.country == "Mozambique" ||
+            d.country == "Niger"
           );
         });
       } else {
