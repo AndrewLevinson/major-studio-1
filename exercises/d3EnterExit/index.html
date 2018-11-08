@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<html>
+
+<head>
+    <script src='https://d3js.org/d3.v5.min.js'></script>
+</head>
+
+<body>
+    <style>
+        text {
+            font: bold 48px monospace;
+        }
+
+        .enter {
+            fill: green;
+        }
+
+        .update {
+            fill: black;
+        }
+
+        .exit {
+            fill: red;
+        }
+    </style>
+    <svg width='960' height='500'></svg>
+    <script>
+
+        let textData = ['one', 'two', 'three', 'four', 'five', 'six'];
+        let counter = 0;
+
+        let svg = d3.select('svg')
+            .attr('width', window.innerWidth)
+            .attr('height', window.innerHeight);
+
+        let g = svg.append('g').attr('transform', 'translate(32,' + (window.innerHeight / 2) + ')');
+
+        let update = (data) => {
+            // JOIN new data with elements.
+            // https://github.com/d3/d3-selection/blob/master/README.md#selection_data
+            let text = g.selectAll('text')
+                .data(data, d => { return d; });
+
+            // EXIT elements not present in new data.
+            console.log('EXIT', text.exit()._groups);
+            text.exit()
+                .attr('class', 'exit')
+                .transition()
+                .duration(4000)
+                .attr('y', 60)
+                .remove();
+
+            // UPDATE elements present in new data.
+            console.log('UPDATE', text._groups);
+            text.attr('class', 'update')
+                .attr('y', 0)
+                .transition()
+                .duration(4000)
+                .attr('x', (d, i) => { return i * 32; });
+
+            // ENTER new elements present in new data.
+            console.log('ENTER', text.enter()._groups);
+            text.enter().append('text')
+                .attr('class', 'enter')
+                .attr('dy', '.35em')
+                .attr('y', -60)
+                .attr('x', (d, i) => { return i * 32; })
+                .text(d => { return d; })
+                .transition()
+                .duration(4000)
+                .attr('y', 0);
+        }
+
+        // The initial display.
+
+        var interval = setInterval(function () {
+            update(textData[counter].split(''));
+            counter++;
+            if (counter >= textData.length)
+                clearInterval(interval);
+        }, 6000);
+
+    </script>
+</body>
+
+</html>

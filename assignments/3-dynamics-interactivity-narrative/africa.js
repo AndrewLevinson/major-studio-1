@@ -1,4 +1,4 @@
-d3.json("africa.geo.json").then(geojson => {
+d3.json("data/africaRev.geo.geojson").then(geojson => {
   // https://www.mapbox.com/mapbox-gl-js/api/#accesstoken
   mapboxgl.accessToken =
     "pk.eyJ1Ijoic2F1dGVyZCIsImEiOiJjajl6MDhhbmM4bWZjMndzNHdwc2dnM2JwIn0.ymR0Z5IEDE04lo11FJBvYw";
@@ -23,6 +23,23 @@ d3.json("africa.geo.json").then(geojson => {
   let transform = d3.geoTransform({ point: projectPoint }); // https://bl.ocks.org/Andrew-Reid/496078bd5e37fd22a9b43fd6be84b36b
   let path = d3.geoPath().projection(transform); // https://github.com/d3/d3-3.x-api-reference/blob/master/Geo-Paths.md
 
+  var colorScale = d3.scaleOrdinal(d3.schemeGreens[9]);
+
+  // let colorScale = d3
+  //   .scaleLinear()
+  //   .domain([15000, 30000, 45000, 60000, 75000, 90000, 105000, 120000, 230000])
+  //   .range([
+  //     "#f7fcf5",
+  //     "#e5f5e0",
+  //     "#c7e9c0",
+  //     "#a1d99b",
+  //     "#74c476",
+  //     "#41ab5d",
+  //     "#238b45",
+  //     "#006d2c",
+  //     "#00441b"
+  //   ]);
+
   let featureElement = svgAfrica
     .selectAll("path")
     .data(geojson.features)
@@ -30,8 +47,16 @@ d3.json("africa.geo.json").then(geojson => {
     .append("path")
     .attr("d", d3.geoPath().projection(transform))
     .attr("stroke", "none")
-    .attr("fill", "#fff")
-    .attr("fill-opacity", 0.1);
+    .attr("fill", function(d, i) {
+      return colorScale(d.properties.totaltwh / d.properties.pop_est);
+    })
+    .attr("fill-opacity", 0.6)
+    .attr("stroke", function(d, i) {
+      if (d.properties.name == "Angola" || d.properties.name == "Chad") {
+        return "lightgreen";
+      }
+    });
+
   // .on("mouseover", function(d) {
   //   console.log(d);
   //   d3.select(this).attr("fill", "lightgreen");
@@ -42,7 +67,7 @@ d3.json("africa.geo.json").then(geojson => {
   //       "Mio.)"
   //   );
   //   d3.select("#hover").attr("fill-opacity", 1);
-  // })
+  // });
   // .on("mouseout", function() {
   //   d3.select(this).attr("fill", "lightgray");
   //   d3.select("#hover").attr("fill-opacity", 0);
@@ -88,14 +113,12 @@ d3.json("africa.geo.json").then(geojson => {
     .sections(d3.selectAll(".container-3 #sections > div"))
     // .offset(3000)
     .on("active", function(i) {
-      if (i == 2 || i == 3 || i == 4) {
-        featureElement
-          .attr("stroke", "orange")
-          .attr("stroke-opacity", 0.4)
-          .attr("fill-opacity", 0.0);
-      } else {
-        featureElement.attr("stroke", "none").attr("fill-opacity", 0.1);
-      }
+      // if (i == 2 || i == 3 || i == 4) {
+      //   featureElement.attr("stroke", "green").attr("stroke-opacity", 0.9);
+      //   // .attr("fill-opacity", 0.0);
+      // } else {
+      //   featureElement.attr("stroke", "none").attr("fill-opacity", 0.4);
+      // }
 
       if (i == 1) {
         map.flyTo({

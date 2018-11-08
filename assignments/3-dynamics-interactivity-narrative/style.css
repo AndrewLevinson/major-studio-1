@@ -13,6 +13,7 @@ g {
   font-weight: 400;
   background: #f8efe7;
   margin: 0;
+  /* max-width: 1500px; */
 }
 
 h1,
@@ -82,6 +83,7 @@ span {
   width: 35%;
   margin-left: 5%;
   position: sticky;
+  position: -webkit-sticky;
   top: 2.5%;
   float: left;
   /* transform: translate(0%, 0%); */

@@ -13,13 +13,21 @@
 
 var data, nonCountries, subCountries, topCountries;
 // load data
-const rawData = d3.csv("data/cleaned/ease_access_cost_cleaned.csv", d => {
+const rawData = d3.csv("data/cleaned/master_cleaned.csv", d => {
   return {
     country: d["Country"],
     ease: +d["Ease"],
     cost: +d["Cost"],
     access: +d["Access"],
-    category: d["Category"]
+    category: d["Category"],
+    area: +d["totalareakm2"],
+    csp: +d["csptwh"],
+    pv: +d["pvtwh"],
+    wind: +d["wind20twh"],
+    totalPotential: +d["totaltwh"],
+    perArea: +d["twhperkm2"],
+    population: +d["population2017"],
+    perPerson: +d["twhperperson"]
   };
 });
 // filter into sets
@@ -179,26 +187,35 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
   // visual plot points
   points
     .append("circle")
+
     .attr("cy", d => {
       return y(d.ease);
     })
     .attr("cx", d => {
       return x(d.access);
     })
+    .transition()
+    .delay(function(d, i) {
+      return i * 60;
+    }) // <-- delay as a function of i
     .attr("r", 4)
     .attr("id", "output");
 
   // text labels on points
   points
     .append("text")
-    .text(d => {
-      return d.country;
-    })
     .attr("x", d => {
       return x(d.access) + 8;
     })
     .attr("y", d => {
       return y(d.ease) + 4;
+    })
+    .transition()
+    .delay(function(d, i) {
+      return i * 60;
+    }) // <-- delay as a function of i
+    .text(d => {
+      return d.country;
     });
 
   // Axis ticks
