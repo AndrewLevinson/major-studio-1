@@ -25,7 +25,7 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
 
   // var colorScale = d3.scaleOrdinal(d3.schemeGreens[9]).domain([0, 0.03]);
 
-  var colorScale = d3.scaleSequential(d3.interpolateGreens).domain([0, 0.0015]);
+  var colorScale = d3.scaleSequential(d3.interpolateGreens).domain([0, 0.0022]);
 
   // var colorScale = d3.scaleSequential(d3.interpolateGreens).domain([0, 0.03]);
 

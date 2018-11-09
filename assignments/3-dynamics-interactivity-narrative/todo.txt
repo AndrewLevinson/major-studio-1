@@ -10,3 +10,14 @@
 10. responsive!!!! 
 11. fix mapbox proportions
 12. Fix headers in sections? 
+
+
+
+-----
+Storylines
+
+Clearly, Sub-Saharan Africa has some of the worst access to electricity in the entire world. 
+Additionally, we can see that of the lowest elecrtified countries in sub-saharan africa, doing business is quite difficult -- someof the the most difficult in the world. 
+So how about a business opportunity in energy? 
+    Well it just so happens that in some of these sub-saharan countries with difficult doing business scores and low access to electricity, there's some of the highest renewable solar and wind potential in the entire world. Africa accounts for more solar irradiance than any continent.
+    By investing in renewable energy, these sub-saharan countries can increase business ease and access to electricity simultaniously. Not only will the product itself literally provide energy access to more of the population, the access to electricity will then enable new business growth in unreleated industries that were previously not possible due to darkness and lack of power.
