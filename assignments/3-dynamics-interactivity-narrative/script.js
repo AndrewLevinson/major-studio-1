@@ -196,7 +196,7 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
     })
     .transition()
     .delay(function(d, i) {
-      return i * 10;
+      return i * 20;
     }) // <-- delay as a function of i
     .attr("r", 4)
     .attr("id", "output");
@@ -204,6 +204,7 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
   // text labels on points
   points
     .append("text")
+    // .attr("text-anchor", "end")
     .attr("x", d => {
       return x(d.access) + 8;
     })
@@ -212,7 +213,7 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
     })
     .transition()
     .delay(function(d, i) {
-      return i * 10;
+      return i * 20;
     }) // <-- delay as a function of i
     .text(d => {
       return d.country;

@@ -1,0 +1,12 @@
+1. South Sudan numbers
+2. add 2017 population in geojson
+3. add area info to geojson
+4. Validate data
+5. update story to transition from 2 to 3 to talk about potential for all sub countries with less access
+6. 3.1 show all of africa (world?) and show view based on area and then based on population...might need to include scale in body or ontop of mapbox. Compare to world output either on map OR in text. 3.2 - highlight a few countries with high wind and solar potential. 3.3 - what's being done today 
+7. conclusion: reiterate point. Mention whats happening today, concerns, call to action/next steps.
+8. Afterwards, focus on intro to EODB section. Might not need graphic. Potentially look at updating table? Or just a couple paragraphs of text in header.
+9. style, type, spelling
+10. responsive!!!! 
+11. fix mapbox proportions
+12. Fix headers in sections? 

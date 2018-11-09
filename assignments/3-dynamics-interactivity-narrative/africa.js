@@ -23,7 +23,16 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
   let transform = d3.geoTransform({ point: projectPoint }); // https://bl.ocks.org/Andrew-Reid/496078bd5e37fd22a9b43fd6be84b36b
   let path = d3.geoPath().projection(transform); // https://github.com/d3/d3-3.x-api-reference/blob/master/Geo-Paths.md
 
-  var colorScale = d3.scaleOrdinal(d3.schemeGreens[9]).domain([0, 33715644]);
+  // var colorScale = d3.scaleOrdinal(d3.schemeGreens[9]).domain([0, 0.03]);
+
+  var colorScale = d3.scaleSequential(d3.interpolateGreens).domain([0, 0.0015]);
+
+  // var colorScale = d3.scaleSequential(d3.interpolateGreens).domain([0, 0.03]);
+
+  // var colorScale = d3.scale
+  //   .scaleThreshold()
+  //   .domain([1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+  //   .range(colorbrewer.RdYlGn["11"]);
 
   // var colorScale = d3
   // .scaleOrdinal(d3.schemeGreens[9])
@@ -62,49 +71,60 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
     .attr("d", d3.geoPath().projection(transform))
     .attr("stroke", "none")
     .attr("fill", function(d, i) {
-      // console.log(
-      //   d.properties.name,
-      //   Math.floor((d.properties.totaltwh * 1000000000) / d.properties.pop_est)
-      // );
+      console.log(
+        d.properties.name,
+        d.properties.totaltwh / d.properties.pop_est
+      );
       // return colorScale(
       //   (d.properties.totaltwh * 1000000000) / d.properties.pop_est
       // );
-      return colorScale(d.properties.totaltwh);
+      // return colorScale(d.properties.totaltwh / d.properties.pop_est);
+      return colorScale(d.properties.totaltwh / d.properties.pop_est);
     })
-    .attr("fill-opacity", 0.6)
+    .attr("fill-opacity", 0.4)
     .attr("stroke", function(d, i) {
       if (
+        d.properties.name == "S. Sudan" ||
         d.properties.name == "Mozambique" ||
+        d.properties.name == "Niger" ||
+        d.properties.name == "Dem. Rep. Congo" ||
         d.properties.name == "Chad" ||
-        d.properties.name == "Niger"
+        d.properties.name == "Burkina Faso" ||
+        d.properties.name == "Malawi" ||
+        d.properties.name == "Madagascar" ||
+        d.properties.name == "Central African Rep." ||
+        d.properties.name == "Guinea-Bissau" ||
+        d.properties.name == "Sierra Leone" ||
+        d.properties.name == "Burundi" ||
+        d.properties.name == "Liberia"
       ) {
         return "lightgreen";
       }
-    });
+    })
 
-  // .on("mouseover", function(d) {
-  //   console.log(d);
-  //   // d3.select(this).attr("fill", "lightgreen");
-  //   d3.select("#hover").text(
-  //     `${d.properties.name.toUpperCase()} (${d.properties.totaltwh} TWh/year)`
-  //   );
-  //   d3.select("#hover")
-  //     .attr("fill-opacity", 1)
-  //     .attr("fill", "#fff");
-  // })
-  // .on("mouseout", function() {
-  //   // d3.select(this).attr("fill", "lightgray");
-  //   // d3.select("#hover").attr("fill-opacity", 0);
-  // })
-  // .on("mousemove", function(d) {
-  //   d3.select("#hover")
-  //     .attr("x", function() {
-  //       return d3.mouse(this)[0] + 20;
-  //     })
-  //     .attr("y", function() {
-  //       return d3.mouse(this)[1] + 10;
-  //     });
-  // });
+    .on("mouseover", function(d) {
+      console.log(d);
+      // d3.select(this).attr("fill", "lightgreen");
+      d3.select("#hover").text(
+        `${d.properties.name.toUpperCase()} (${d.properties.totaltwh} TWh/year)`
+      );
+      d3.select("#hover")
+        .attr("fill-opacity", 1)
+        .attr("fill", "#fff");
+    })
+    .on("mouseout", function() {
+      // d3.select(this).attr("fill", "lightgray");
+      // d3.select("#hover").attr("fill-opacity", 0);
+    })
+    .on("mousemove", function(d) {
+      d3.select("#hover")
+        .attr("x", function() {
+          return d3.mouse(this)[0] + 20;
+        })
+        .attr("y", function() {
+          return d3.mouse(this)[1] + 10;
+        });
+    });
 
   svgAfrica.append("text").attr("id", "hover");
 
