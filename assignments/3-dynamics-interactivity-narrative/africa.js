@@ -1,4 +1,4 @@
-d3.json("data/africaRev.geo.geojson").then(geojson => {
+d3.json("data/africaRev.geojson").then(geojson => {
   // https://www.mapbox.com/mapbox-gl-js/api/#accesstoken
   mapboxgl.accessToken =
     "pk.eyJ1Ijoic2F1dGVyZCIsImEiOiJjajl6MDhhbmM4bWZjMndzNHdwc2dnM2JwIn0.ymR0Z5IEDE04lo11FJBvYw";
@@ -8,11 +8,12 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
     container: "map",
     style: "mapbox://styles/mapbox/navigation-preview-night-v2",
     center: [18.2812, 9.1021], // 9.1021° N, 18.2812° E
-    zoom: 0
+    zoom: 1
   });
 
-  // map.addControl(new mapboxgl.NavigationControl());
-
+  map.addControl(new mapboxgl.NavigationControl());
+  const numFormatT = d3.format(",d");
+  const numFormatF = d3.format(".2f");
   let container = map.getCanvasContainer();
   let svgAfrica = d3
     .select(container)
@@ -23,45 +24,13 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
   let transform = d3.geoTransform({ point: projectPoint }); // https://bl.ocks.org/Andrew-Reid/496078bd5e37fd22a9b43fd6be84b36b
   let path = d3.geoPath().projection(transform); // https://github.com/d3/d3-3.x-api-reference/blob/master/Geo-Paths.md
 
-  // var colorScale = d3.scaleOrdinal(d3.schemeGreens[9]).domain([0, 0.03]);
+  let domainMin = 0;
+  let capitaMax = 0.002;
+  let areaMax = 0.05;
 
-  var colorScale = d3.scaleSequential(d3.interpolateGreens).domain([0, 0.0022]);
-
-  // var colorScale = d3.scaleSequential(d3.interpolateGreens).domain([0, 0.03]);
-
-  // var colorScale = d3.scale
-  //   .scaleThreshold()
-  //   .domain([1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
-  //   .range(colorbrewer.RdYlGn["11"]);
-
-  // var colorScale = d3
-  // .scaleOrdinal(d3.schemeGreens[9])
-  // .domain([
-  //   0,
-  //   4214456,
-  //   8428911,
-  //   12643367,
-  //   16857822,
-  //   21072278,
-  //   25286733,
-  //   29501189,
-  //   33715644
-  // ]);
-
-  // let colorScale = d3
-  //   .scaleLinear()
-  //   .domain([15000, 30000, 45000, 60000, 75000, 90000, 105000, 120000, 230000])
-  //   .range([
-  //     "#f7fcf5",
-  //     "#e5f5e0",
-  //     "#c7e9c0",
-  //     "#a1d99b",
-  //     "#74c476",
-  //     "#41ab5d",
-  //     "#238b45",
-  //     "#006d2c",
-  //     "#00441b"
-  //   ]);
+  let colorScale = d3
+    .scaleSequential(d3.interpolateGreens)
+    .domain([domainMin, areaMax]);
 
   let featureElement = svgAfrica
     .selectAll("path")
@@ -70,18 +39,12 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
     .append("path")
     .attr("d", d3.geoPath().projection(transform))
     .attr("stroke", "none")
-    .attr("fill", function(d, i) {
-      console.log(
-        d.properties.name,
-        d.properties.totaltwh / d.properties.pop_est
-      );
-      // return colorScale(
-      //   (d.properties.totaltwh * 1000000000) / d.properties.pop_est
-      // );
-      // return colorScale(d.properties.totaltwh / d.properties.pop_est);
-      return colorScale(d.properties.totaltwh / d.properties.pop_est);
+    .attr("fill", function(d) {
+      return d.properties.totaltwh == 0
+        ? "grey"
+        : colorScale(d.properties.totaltwh / d.properties.areakm);
     })
-    .attr("fill-opacity", 0.4)
+    .attr("fill-opacity", 0.5)
     .attr("stroke", function(d, i) {
       if (
         d.properties.name == "S. Sudan" ||
@@ -98,35 +61,82 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
         d.properties.name == "Burundi" ||
         d.properties.name == "Liberia"
       ) {
-        return "lightgreen";
+        return "#00FF40";
       }
-    })
-
-    .on("mouseover", function(d) {
-      console.log(d);
-      // d3.select(this).attr("fill", "lightgreen");
-      d3.select("#hover").text(
-        `${d.properties.name.toUpperCase()} (${d.properties.totaltwh} TWh/year)`
-      );
-      d3.select("#hover")
-        .attr("fill-opacity", 1)
-        .attr("fill", "#fff");
-    })
-    .on("mouseout", function() {
-      // d3.select(this).attr("fill", "lightgray");
-      // d3.select("#hover").attr("fill-opacity", 0);
-    })
-    .on("mousemove", function(d) {
-      d3.select("#hover")
-        .attr("x", function() {
-          return d3.mouse(this)[0] + 20;
-        })
-        .attr("y", function() {
-          return d3.mouse(this)[1] + 10;
-        });
     });
 
-  svgAfrica.append("text").attr("id", "hover");
+  // tooltip method
+  var tooltip = {
+    element: null,
+    init: function() {
+      this.element = d3
+        .select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+    },
+    show: function(t) {
+      this.element
+        .html(t)
+        .transition()
+        .duration(200)
+        .style("left", d3.event.pageX + 20 + "px")
+        .style("top", d3.event.pageY - 20 + "px")
+        .style("opacity", 0.9);
+    },
+    move: function() {
+      this.element
+        .transition()
+        .duration(30)
+        .style("left", d3.event.pageX + 20 + "px")
+        .style("top", d3.event.pageY - 20 + "px")
+        .style("opacity", 0.9);
+    },
+    hide: function() {
+      this.element
+        .transition()
+        .duration(500)
+        .style("opacity", 0);
+    }
+  };
+
+  tooltip.init();
+
+  featureElement
+    .on("mouseover", function(d) {
+      tooltip.show(
+        `<b>${d.properties.name.toUpperCase()}</b><br>
+        Access to Electricity: ${
+          d.properties.access == 0 || d.properties.access == null
+            ? "--"
+            : d.properties.access + "%"
+        }<br>
+        Doing Business Rank: ${
+          d.properties.easedb == 0 || d.properties.easedb == null
+            ? "--"
+            : numFormatT(d.properties.easedb) + " of 190"
+        }<br>
+        <b><span>Solar & Wind Potential</span></b><br>
+        Total Raw Potential: 
+        ${numFormatT(d.properties.totaltwh)} TWh/year<br>
+        Potential per Capita: ${numFormatT(
+          (d.properties.totaltwh * 1000000000) / d.properties.pop_2017
+        )} KWh/year<br>
+        Potential per Area: ${numFormatT(
+          (d.properties.totaltwh * 1000000000) / d.properties.areakm
+        )} KWh/year
+        `
+      );
+    })
+    .on("mousemove", function(d, i) {
+      tooltip.move();
+    })
+    .on("mouseout", function(d, i) {
+      //createStuff();
+      tooltip.hide();
+    });
+
+  // svgAfrica.append("text").attr("id", "hover");
 
   function update() {
     featureElement.attr("d", path);
@@ -163,17 +173,30 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
       // } else {
       //   featureElement.attr("stroke", "none").attr("fill-opacity", 0.4);
       // }
+      console.log("map", i);
 
-      if (i == 1) {
+      if (i == 2) {
+        // colorScale.domain([domainMin, areaMax]);
+        // featureElement.transition().attr("fill", function(d) {
+        //   return d.properties.totaltwh == 0
+        //     ? "grey"
+        //     : colorScale(d.properties.totaltwh / d.properties.areakm);
+        // });
         map.flyTo({
           center: [18.2812, 9.1021],
           zoom: 2.4
         });
-      } else if (i == 2) {
+      } else if (i == 3) {
         map.flyTo({
           center: [18.7322, 15.4542],
           zoom: 4.5
         });
+        // colorScale.domain([domainMin, capitaMax]);
+        // featureElement.transition().attr("fill", function(d) {
+        //   return d.properties.totaltwh == 0
+        //     ? "grey"
+        //     : colorScale(d.properties.totaltwh / d.properties.pop_2017);
+        // });
       } else if (i == 3) {
         map.flyTo({
           center: [8.0817, 17.6078],
@@ -187,7 +210,7 @@ d3.json("data/africaRev.geo.geojson").then(geojson => {
       } else {
         map.flyTo({
           center: [18.2812, 9.1021],
-          zoom: 0
+          zoom: 1
         });
       }
     });

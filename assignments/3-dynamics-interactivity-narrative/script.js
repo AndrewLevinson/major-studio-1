@@ -11,7 +11,6 @@
 // footnotes and data sources
 // data gutcheck
 
-var data, nonCountries, subCountries, topCountries;
 // load data
 const rawData = d3.csv("data/cleaned/master_cleaned.csv", d => {
   return {
@@ -30,32 +29,9 @@ const rawData = d3.csv("data/cleaned/master_cleaned.csv", d => {
     perPerson: +d["twhperperson"]
   };
 });
-// filter into sets
-rawData.then(d => {
-  data = d.filter(d => {
-    return d.ease > 0; // all
-  });
-  // console.log(data);
-});
 
-rawData.then(d => {
-  nonCountries = data.filter(d => {
-    return d.category == "non";
-  });
-  // console.log(nonCountries);
-});
-rawData.then(d => {
-  subCountries = data.filter(d => {
-    return d.category == "sub";
-  });
-  // console.log(subCountries);
-});
-rawData.then(d => {
-  topCountries = data.filter(d => {
-    return d.category == "top";
-  });
-  // console.log(topCountries);
-  svg(data, nonCountries, subCountries, topCountries, ".container-2 #graph");
+rawData.then(data => {
+  svg(data, ".container-1 #graph", ".container-2 #graph");
 });
 
 // global svg variables
@@ -68,25 +44,51 @@ if (window.innerWidth < 925) {
   width = window.innerWidth * 0.95 - margin;
   height = window.innerHeight * 0.6;
 } else {
-  width = window.innerWidth * 0.45 - margin;
-  height = window.innerHeight * 0.9;
+  width = window.innerWidth * 0.55 - margin;
+  height = window.innerHeight * 0.72;
 }
 
-let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
+let svg = (data, firstGraph, secondGraph) => {
   var svg1 = d3
-    .select("#graph")
+    .select(firstGraph)
     .append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("fill", "#3d3d3d");
 
-  var colors = ["orange", "purple", "steelblue", "pink", "blue", "green"];
-  var r = [0, 40, 30, 25, 80, 130];
-  var circle = svg1
-    .append("circle")
-    .attr("cx", width / 2)
-    .attr("cy", height / 2)
-    .attr("r", r[0]);
+  let group1 = svg1.append("g").attr("id", "group");
+
+  let bars = group1
+    .selectAll("g")
+    .data(data)
+    .enter()
+    .append("g")
+    .attr("transform", (d, i) => {
+      return `translate(0, ${(i * height) / data.length})`;
+    });
+
+  // visual bar
+  bars
+    .append("rect")
+    .attr("height", "10px") // TODO
+    .attr("width", (d, i) => {
+      return d.cost;
+    }) // TODO
+    .attr("y", (d, i) => {
+      return i * 2;
+    })
+    .attr("x", (d, i) => {
+      return width - d.cost;
+    })
+    .attr("id", "output");
+
+  // var colors = ["orange", "purple", "steelblue", "pink", "blue", "green"];
+  // var r = [0, 40, 30, 25, 80, 130];
+  // var circle = svg1
+  //   .append("circle")
+  //   .attr("cx", width / 2)
+  //   .attr("cy", height / 2)
+  //   .attr("r", r[0]);
 
   d3.graphScroll()
     .container(d3.select(".container-1"))
@@ -95,14 +97,16 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
     .sections(d3.selectAll(".container-1 #sections > div"))
     // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
     .on("active", function(i) {
-      circle
-        .transition()
-        .duration(1000)
-        .attr("r", r[i])
-        .transition()
-        .style("fill", colors[i]);
+      // circle
+      //   .transition()
+      //   .duration(1000)
+      //   .attr("r", r[i])
+      //   .transition()
+      //   .style("fill", colors[i]);
+      console.log(i);
     });
 
+  // scatter plot
   // linear scale x
   let x = d3
     .scaleLinear()
@@ -116,20 +120,10 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
     .range([height, margin]);
 
   let graph = d3
-    .select(applyTo)
+    .select(secondGraph)
     .append("svg")
     .attr("width", width)
     .attr("height", height + 20);
-
-  // title
-  // let title = graph
-  //   .append("g")
-  //   .attr("id", "title")
-  //   .append("text")
-  //   .text("Total Electricty Output (GWh) to Renewable Energy Share (%), 2015")
-  //   .style("text-anchor", "end")
-  //   .attr("x", width)
-  //   .attr("y", margin + 5);
 
   // x axis title
   let xAxisTitle = graph
@@ -245,8 +239,18 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
         points.attr("class", "up");
       } else if (i == 2) {
         points.attr("class", "inactive");
-        points.classed("active", d => {
+        points.classed("special", d => {
           return d.access == 100 && d.ease <= 50;
+        });
+        points.classed("active", d => {
+          return (
+            d.ease == 1 ||
+            // d.ease == 10 ||
+            // d.ease == 20 ||
+            // d.ease == 30 ||
+            // d.ease == 40 ||
+            d.ease == 50
+          );
         });
       } else if (i == 3) {
         points.attr("class", "inactive");
@@ -258,17 +262,19 @@ let svg = (data, nonCountries, subCountries, topCountries, applyTo) => {
         points.classed("active", d => {
           return d.category == "sub" && d.access < 25;
         });
-      } else if (i == 5) {
-        points.attr("class", "inactive");
-        points.classed("active", d => {
-          // return d.category == "sub" && d.ease > 173 && d.access < 21;
-          return (
-            d.country == "Chad" ||
-            d.country == "Mozambique" ||
-            d.country == "Niger"
-          );
-        });
-      } else {
+      }
+      // } else if (i == 5) {
+      //   points.attr("class", "inactive");
+      //   points.classed("active", d => {
+      //     // return d.category == "sub" && d.ease > 173 && d.access < 21;
+      //     return (
+      //       d.country == "Chad" ||
+      //       d.country == "Mozambique" ||
+      //       d.country == "Niger"
+      //     );
+      //   });
+      // }
+      else {
         points.attr("class", "up");
       }
     });
