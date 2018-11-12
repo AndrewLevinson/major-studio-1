@@ -170,25 +170,8 @@ i {
 span {
   color: var(--green-color);
 }
-.container-1 svg {
+/* .container-1 svg {
   background-color: rgba(204, 204, 204, 0.336);
-}
-/* .splash {
-  height: 100vh;
-  display: flex;
-  max-width: 40rem;
-  justify-content: space-around;
-  text-align: center;
-  margin: 0 auto;
-  align-items: center;
-} */
-/* 
-.stuck {
-  position: sticky;
-  top: 0;
-  background-color: #f8efe7;
-  z-index: 999;
-  opacity: 1;
 } */
 
 /* scroll library */
@@ -424,18 +407,14 @@ li::before {
   font-size: 2em;
 }
 
-th {
-  text-align: left;
+.top-green > rect {
+  fill: var(--green-color);
 }
-th,
-td {
-  padding: 0 1em 0.5ex 0;
+
+.bottom-red > rect {
+  fill: red;
 }
-th.center,
-td.center {
-  text-align: center;
-}
-th.num,
-td.num {
-  text-align: right;
+
+.container-1 rect {
+  border-radius: 10px;
 }
