@@ -252,6 +252,10 @@ let svg = (data, firstGraph, secondGraph) => {
             .text(d => {
               return `${format(d.life)} years`;
             });
+        } else {
+          svg1.selectAll("#titled").remove();
+          bars.selectAll("#label").remove();
+          bars.selectAll("rect").remove();
         }
       });
   });

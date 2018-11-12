@@ -412,7 +412,7 @@ li::before {
 }
 
 .bottom-red > rect {
-  fill: red;
+  fill: #3d3d3d;
 }
 
 .container-1 rect {
