@@ -42,7 +42,7 @@ d3.json("data/africaRev.geojson").then(geojson => {
     .attr("fill", function(d) {
       return d.properties.totaltwh == 0
         ? "grey"
-        : colorScale(d.properties.totaltwh / d.properties.areakm);
+        : colorScale(d.properties.totaltwh / d.properties.areakm); // per area
     })
     .attr("fill-opacity", 0.5)
     .attr("stroke", function(d, i) {
@@ -117,12 +117,12 @@ d3.json("data/africaRev.geojson").then(geojson => {
             : numFormatT(d.properties.easedb) + " of 190"
         }<br>
         <b><span>Solar & Wind Potential</span></b><br>
-        Total Raw Potential: 
+        Total Potential: 
         ${numFormatT(d.properties.totaltwh)} TWh/year<br>
-        Potential per Capita: ${numFormatT(
+        Per Capita: ${numFormatT(
           (d.properties.totaltwh * 1000000000) / d.properties.pop_2017
         )} KWh/year<br>
-        Potential per Area: ${numFormatT(
+        Per KM<sup>2</sup>: ${numFormatT(
           (d.properties.totaltwh * 1000000000) / d.properties.areakm
         )} KWh/year
         `
