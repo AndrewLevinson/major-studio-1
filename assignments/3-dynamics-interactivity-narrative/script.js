@@ -42,7 +42,7 @@ let width, height;
 
 if (window.innerWidth < 925) {
   width = window.innerWidth * 0.95 - margin;
-  height = window.innerHeight * 0.6;
+  height = window.innerHeight * 0.75;
 } else {
   width = window.innerWidth * 0.55 - margin;
   height = window.innerHeight * 0.72;
@@ -384,6 +384,14 @@ let svg = (data, firstGraph, secondGraph) => {
   graph.append("g").call(xAxis);
   graph.append("g").call(yAxis);
 
+  // function for scatter plot to remove all classes before operation
+  function resetClasses() {
+    points.classed("inacactive", false);
+    points.classed("active", false);
+    points.classed("hidden", false);
+    points.classed("up", false);
+    points.classed("special", false);
+  }
   d3.graphScroll()
     .container(d3.select(".container-2"))
     .graph(d3.selectAll(".container-2 #graph"))
@@ -392,33 +400,30 @@ let svg = (data, firstGraph, secondGraph) => {
     // .offset(3000)
     .on("active", function(i) {
       if (i == 0) {
+        resetClasses();
         points.attr("class", "hidden");
       } else if (i == 1) {
+        resetClasses();
         points.attr("class", "up");
       } else if (i == 2) {
-        points.attr("class", "inactive");
-        points.classed("special", d => {
-          return d.access == 100 && d.ease <= 50;
+        resetClasses();
+        // points.classed("inacactive", true);
+        points.attr("class", d => {
+          return d.access == 100 && d.ease <= 50 ? "special" : "up";
         });
         points.classed("active", d => {
-          return (
-            d.ease == 1 ||
-            // d.ease == 10 ||
-            // d.ease == 20 ||
-            // d.ease == 30 ||
-            // d.ease == 40 ||
-            d.ease == 50
-          );
+          return d.ease == 1 || d.ease == 50;
         });
       } else if (i == 3) {
-        points.attr("class", "inactive");
-        points.classed("active", d => {
-          return d.category == "sub";
+        resetClasses();
+        points.attr("class", d => {
+          return d.category == "sub" ? "active" : "inactive";
         });
       } else if (i == 4) {
-        points.attr("class", "inactive");
-        points.classed("active", d => {
-          return d.category == "sub" && d.access < 25;
+        resetClasses();
+
+        points.attr("class", d => {
+          return d.category == "sub" && d.access < 25 ? "active" : "inactive";
         });
       }
       // } else if (i == 5) {
@@ -433,6 +438,7 @@ let svg = (data, firstGraph, secondGraph) => {
       //   });
       // }
       else {
+        resetClasses();
         points.attr("class", "up");
       }
     });
