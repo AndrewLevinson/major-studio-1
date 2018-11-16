@@ -43,3 +43,6 @@ According to the Intertational Renewable Energy Agency (IRENA), since 2010 the c
 
 Cost of south sudan energy
 Chad has highest concentration of solar + wind combined. Compare to USA
+
+Code credit
+http://1wheel.github.io/graph-scroll/

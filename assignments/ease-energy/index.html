@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Ease of Doing Business and Renewable Energy Potential</title>
-
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png" />
     <!--
       Mobile Specific Metas
       ––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -15,392 +15,429 @@
       Style
        ––––––––––––––––––––––––––––––––––––––––––––––––––
     -->
-    <link rel="shortcut icon" type="image/png" href="favicon.png" />
-    <link rel="stylesheet" href="style.css" />
+
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/type.css" />
+
+    <!-- google fonts -->
     <link
-      href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700"
+      href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,500,600,700|Rubik:400,500,700"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css?family=Rubik:300,400,500"
-      rel="stylesheet"
-    />
-    <link
-      href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
+
+    <!-- font awesome -->
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
       integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
       crossorigin="anonymous"
     />
+
+    <!-- mapbox -->
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+
     <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
   </head>
 
   <!-- <body onresize="window.location.reload(true)"> -->
-    <body>
-
-    <article class="begin">
-      <section class="intro">
-        <div class="prompt">
-          
-            <h2>
-              How can acting on <span>renewable energy potential</span> improve
-              the ease of doing business in Sub-Saharan Africa?
-            </h2>
-         
-          <!-- <h2>
-            How can acting on <span>renewable energy potential</span> improve
-            economies in Sub-Saharan Africa?
-          </h2> -->
-          <h6 class="byline">
-            By <strong>Andrew Levinson</strong> | November, 2018
-          </h6>
-        </div>
-        <div class="placeholder">
-          <i class="fas fa-sun"></i><i class="fas fa-lightbulb"></i
-          ><i class="fas fa-wind"></i>
-        </div>
-        <div class="written">
-          <!-- <p>
-            As we enter a new age of energy potential in the form of renewables and cost have greatly decreased over the last five year (wind and solar). 
-            It's very qucikly becoming a practical form of energy, especially as concerns over fossil fuels continue to mount. 
-            One of the most critical pieces of building a business is electricity. Unfortunately, Sub-Saharan Africa has some of the lowest access to elecricity in the world. 
-            Fortunately, Sub-Saharan Africa has some of the greatest renewable energy potential in the world in the form of solar and wind power.
-          </p> -->
-          <p>One of the biggest obstacles to effectively growing an economy is a lack of access to affordable electricity. Unfortunately, Sub-Saharan Africa has some of the harshest economic and electrification conditions in the world. 
-            Luckily, there's a major opportunity in the form of <span>renewable energy</span>.</p>
-          <p>According to the International Renewable Energy Agency (IRENA), since 2010 the cost of solar PV technology has decreased by over 80% and wind power by about 50%. And as turns out, some of the highest
-              natural solar and wind potential fall on some of the least electrified
-              Sub-Saharan African countries.</p>
-
-              <p>There's certainly many ways to judge a country or a region's economic performance, but here we'll use the Ease of Doing Business Index.
-              Created at the World Bank, the <a href="https://datacatalog.worldbank.org/dataset/doing-business" target="_blank">ease of doing business score and
-                subsequent ranking</a>  means the "regulatory environment is more
-              conducive to the starting and operation of a local firm." A higher ranking (low numerical value) indicate better, usually simpler, regulations for businesses and stronger protections of property rights. Empirical research funded by the World Bank shows that the economic growth impact of improving these regulations is strong.
-            </p>
-          <!-- <div class="minis">
-            <img src="assets/mini1.png" />
-            <img src="assets/mini2.png" />
-            <img src="assets/mini3.png" />
-          </div> -->
-          <p>
-           The score is made up of a composite of 10 measurements weighted equally. You can read about it in more detail in <a href="http://www.worldbank.org/content/dam/doingBusiness/media/Annual-Reports/English/DB2019-report_web-version.pdf" target="_blank">the official report</a>.  
-           One of the 10 critical metrics is "Getting Electricity." Continue reading to learn more about the impact of electricity on local business and why the solution is in <span>renewable energy</span>.
-          </p>
-        </div>
-      </section>
-    </article>
-    <hr class="break"/>
-
-    <!-- <div id="container" class="container-1">
-      <div id="graph">
-          <header class="part-header">
-              <p>Section 1</p>
-              <h3>What is the Ease of Doing Business Index?</h3>
-            </header>
-     
-      </div>
-      <div id="sections">
-        <div class="blank">.</div>
-        <div class="text-content">
-          <h4 class="sub-header">Origin</h4>
-          <p>
-            Created at the World Bank, the ease of doing business score and
-            subsequent ranking means the "regulatory environment is more
-            conducive to the starting and operation of a local firm."
-          </p>
-          <p>
-            The rankings are determined by sorting the aggregate scores on 10
-            topics, each consisting of several indicators, giving equal weight
-            to each topic.
-          </p>
-          <p>
-            The index takes the scores from 190 countries and ranks them in
-            order of difficulty. A score of 1 corresponds to the easiest
-            regulatory environment and a score of 190 is the most difficult.
-          </p>
-          <ul>
-            Starting a Business Dealing with Construction Permits Getting
-            Electricity Registering Property Getting Credit Protecting Minority
-            Investors Paying Taxes Trading across Borders Enforcing Contracts
-            Resolving Insolvency
-          </ul>
-        </div>
-        <div class="text-content">
-          <h4 class="sub-header">Why is a high score important?</h4>
-          <p>
-            Currently New Zealand holds the number 1 ranking and Somalia has
-            harshest business environment at 190.
-          </p>
-          <p></p>
-        </div>
-        <div class="text-content">
-          <h4 class="sub-header">Subheader</h4>
-
-          <p>
-            kaflaf kjvnajkvnava kaflaf kjvnajkvnavakaflaf kjvnajkvnavakaflaf
-            kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
-            kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
-            kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
-            kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava
-          </p>
-        </div>
-        <div class="text-content last">
-          <h4 class="sub-header">Subheader</h4>
-          <p>
-            kaflaf kjvnajkvnava kaflaf kjvnajkvnavakaflaf kjvnajkvnavakaflaf
-            kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
-            kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
-            kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
-            kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava
-          </p>
-          <div class="keep-scrolling">
-            <h4 class="sub-header">↓ Keep Scrolling ↓</h4>
-            <p>
-              Next let's look at the correlation between Ease of Doing Business
-              and Access to Electricity.
-            </p>
-          </div>
-        </div>
-        <p class="final">.</p>
-      </div>
-    </div>
-    <hr class="break"/> -->
-
-
-    <div id="container" class="container-2">
-      <div id="graph">
-        <header class="part-header">
-          <p>Part 1</p>
-          <h3>Ease of Doing Business and <span>access to electricity</span></h3>
-        </header>
-        <!-- svg goes here -->
-      </div>
-      <div id="sections">
-        <div class="blank">.</div>
-        <div class="text-content">
-          <h4 class="sub-header">All Countries</h4>
-          <p>
-            If we plot every country's Ease of Doing Business ranking against their access to
-            electricity percentage, it's clear there's a linear
-            relationship. <br /><br />The countries that have high access to
-            electricity have a better Doing Business score.
-          </p>
-        </div>
-        <div class="text-content">
-          <h4 class="sub-header">Top 50 Easiest Countries to Do Business</h4>
-          <p>
-            Take a look at the cluster of countries in the bottom right of this
-            plot. The 50 best countries to do business in all have <strong>100%</strong> access
-            to electricity<br /><br />What about Sub-Saharan Africa?
-          </p>
-        </div>
-        <div class="text-content">
-          <h4 class="sub-header">Sub-Saharan Africa</h4>
-          <p>
-            Sub-Saharan Africa is spread out across the board, but the linear relationship is clearly present here. The more electrified a country is, the easier is it to do business.<br /><br />Let's focus on a smaller subset
-          </p>
-        </div>
-        <div class="text-content last">
-          <h4 class="sub-header">
-            Less Than 25% Access to
-            Electricity in Sub-Saharan Africa 
-          </h4>
-          <p>
-            13 Sub-Saharan African countries have less than 25% access to
-            electricity. All of them also fall within the 30% hardest countries
-            to do business in in the world, with an average ranking of
-            <strong>163</strong> of 190.
-          </p>
-
-          <p>
-            Luckily, there's an opportunity. In many of these countries, there's some of
-            the highest<span>
-              <strong
-                >renewable potential in the entire world</strong
-              >.
-            </span>
-            Africa accounts for more solar irradiance than any other continent
-            and in many countries exceeds the minimum requirements for wind power.
-          </p>
-          <div class="keep-scrolling">
-            <h4 class="sub-header">↓ Keep Scrolling ↓</h4>
-            <p>
-              Next let's look at a map to see natural
-              <span>renewable energy potential</span> in Africa.
-            </p>
-          </div>
-        </div>
-
-        <!--
-          <div class="text-content last">
-            <h4 class="sub-header">A Closer Look</h4>
-            <p>
-              Let's take a closer look at three Sub-Saharan African countries that
-              have some of the harshest business environments and least access to
-              electricity:
-            </p>
-
-            <ul>
-              <li>
-                <strong>Chad:</strong> 9% Access to Elecricity // 180 Ease of
-                Doing Business Ranking
-              </li>
-              <li>
-                <strong>Niger:</strong> 16% Access to Elecricity // 150 Ease of
-                Doing Business Ranking
-              </li>
-              <li>
-                <strong>Mozambique:</strong> 24% Access to Elecricity // 137 Ease
-                of Doing Business Ranking
-              </li>
-            </ul>
-            <p>
-              How can these countries improve their ability to do business and
-              their access to electricity at the same time? By taking advantage of
-              their natural <span>renewable energy potential.</span>
-            </p>
-            <p>
-              As mounting concerns about climate and reliance on fossil fuels
-              increase, so have the necessary technological advancements that
-              allow cost-efficient renewable infrustructure from solar, wind, and
-              biomass sources to be possible. While we still have to make more
-              strides to make a world of only renewable energy, it's time to
-              analyze our untapped potential. As turns out, some of the highest
-              natural solar and wind potential fall on some of the poorest
-              Sub-Saharan African countries.
-            </p>
-          </div>
-        -->
-        <p class="final">.</p>
-      </div>
-    </div>
-    <hr class="break"/>
-
-    <div id="container" class="container-3">
-      <div id="graph">
-        <header class="part-header">
-          <p>Part 2</p>
-          <h3><span>Renewable Energy Potential</span> in Sub-Saharan Africa</span></h3>
-        </header>
-        <div id="map"><!-- mapbox goes here --></div>
-        <!-- svg goes here -->
-      </div>
-      <div id="sections">
-        <div class="blank">.</div>
-        <div class="text-content">
-          <h4 class="sub-header">A look at the World's Potential</h4>
-          <p>
-            In order to see just how great Africa's renewable potential is, take a look at the map to the left. 
-          </p>
-        </div>
-        <div class="text-content">
-        <h4 class="sub-header">A Closer Look at Africa's Potential</h4>
-        <p>
-          The map of Africa displays the amount combined solar and wind energy
-          potential for each African country measured in TWh/year per Km<sup
-            >2</sup
-          >
-        </p>
-        <p>The Sub-Saharan African countries with less than 25% access to electricity mentioned above are outlined on the map in <span>bright green</span>.</p>
-        <br><br>
-        <p>← Hover over the countries on the map to see just how much potential they have. ←</p>
-      </div>
-        <div class="text-content">
-          <h4 class="sub-header">Chad</h4>
-          9% Access to Elecricity // 180 Ease of Doing Business Ranking
-          <br /><br />
-          <h5>Solar and Wind Energy Potential</h5>
-          <ul>
-            <li>
-              Solar
-              <ul>
-                <li>(CSP): 10,284 TWh/year</li>
-                <li>(PV): 10,506 TWh/year</li>
-                <li>Total Solar: 10,506 TWh/year</li>
-              </ul>
-            </li>
-            <li>Wind: 9,165 TWh/year</li>
-            <li><strong>Total Potential: 29,955 TWh/year</strong></li>
-          </ul>
-          <p>
-            So how much is 29,955 TWh/year? That's the equivalent of about 2
-            Million KWh/year for Chad per capita. To put that in perspective,
-            the average United States resident uses about 12,000 KWh/year.
-          </p>
-        </div>
-        <div class="text-content">
-          <h4 class="sub-header">Niger</h4>
-          <p>[Duplicate for Niger]</p>
-        </div>
-        <div class="text-content">
-          <h4 class="sub-header">Mozambique</h4>
-          <p>[Duplicate for Mozambique]</p>
-        </div>
-        <div class="text-content last">
-          <h4 class="sub-header">Conclusion</h4>
-          <p>[insert conclusion once content is finalized]</p>
-        </div>
-        <p class="final">.</p>
-      </div>
-    </div>
-
-    <hr class="break"/>
-
-    <!-- <section class="splash">
-      <header>
-        <h3>
-          So how can Sub-Saharan countries improve their access to electricty
-          and their ease of doing business ranking?
-        </h3>
-        <br /><br />
-        <h2>By investing in <span>renewable energy</span>.</h2>
-        <div class="notes" style="margin-top: 20%">
-          <h4>Data Sources & Footnotes</h4>
-          <p>[insert sources]</p>
-        </div>
-      </header>
-    </section> -->
-
-    <article class="begin">
+  <body>
+    <div class="wrapper">
+      <article class="begin">
         <section class="intro">
           <div class="prompt">
-<h2>
-            Acting on <span>renewable energy potential</span> will improve
-            the ease of doing business in Sub-Saharan Africa.
-          </h2>
+            <h3>
+              How can acting on <span>renewable energy potential</span> improve
+              the ease of doing business in Sub-Saharan Africa?
+            </h3>
+            <h6 class="byline">
+              By <strong>Andrew Levinson</strong> | November, 2018
+            </h6>
+          </div>
+          <div class="placeholder">
+            <i class="fas fa-sun"></i><i class="fas fa-lightbulb"></i
+            ><i class="fas fa-wind"></i>
           </div>
           <div class="written">
+            <!--
+              <p>
+                As we enter a new age of energy potential in the form of renewables and cost have greatly decreased over the last five year (wind and solar).
+                It's very qucikly becoming a practical form of energy, especially as concerns over fossil fuels continue to mount.
+                One of the most critical pieces of building a business is electricity. Unfortunately, Sub-Saharan Africa has some of the lowest access to elecricity in the world.
+                Fortunately, Sub-Saharan Africa has some of the greatest renewable energy potential in the world in the form of solar and wind power.
+              </p>
+            -->
             <p>
-              Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. 
+              One of the biggest obstacles to effectively growing an economy is
+              a lack of access to affordable electricity. Unfortunately,
+              Sub-Saharan Africa has some of the harshest economic and
+              electrification conditions in the world. Luckily, there's a major
+              opportunity in the form of <span>renewable energy</span>.
             </p>
             <p>
-                Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. Summary paragraph. 
+              According to the International Renewable Energy Agency (IRENA),
+              since 2010 the cost of solar PV technology has decreased by over
+              80% and wind power by about 50%. And as turns out, some of the
+              highest natural solar and wind potential fall on some of the least
+              electrified Sub-Saharan African countries.
+            </p>
 
-              </p>
-          </div>
-          <div class="footnotes">
-              <hr class="footer"/>
-            <h6>Data Sources, Methodology, and Foot Notes</h6>
-            <p>All data was collected at...</p>
-            <p>The methodology was to...</p>
-            <p>This story was created as an academic project...</p>
-            <p>Footnotes:
-              <ol>
-                <li>Footnote 1</li>
-                <li>Footnote 2</li>
-              </ol>
+            <p>
+              There's certainly many ways to judge a country or a region's
+              economic performance, but here we'll use the Ease of Doing
+              Business Index. Created at the World Bank, the
+              <a
+                href="https://datacatalog.worldbank.org/dataset/doing-business"
+                target="_blank"
+                >ease of doing business score and subsequent ranking</a
+              >
+              means the "regulatory environment is more conducive to the
+              starting and operation of a local firm." A higher ranking (low
+              numerical value) indicate better, usually simpler, regulations for
+              businesses and stronger protections of property rights. Empirical
+              research funded by the World Bank shows that the economic growth
+              impact of improving these regulations is strong.
+            </p>
+            <!--
+              <div class="minis">
+                <img src="assets/mini1.png" />
+                <img src="assets/mini2.png" />
+                <img src="assets/mini3.png" />
+              </div>
+            -->
+            <p>
+              The score is made up of a composite of 10 measurements weighted
+              equally. You can read about it in more detail in
+              <a
+                href="http://www.worldbank.org/content/dam/doingBusiness/media/Annual-Reports/English/DB2019-report_web-version.pdf"
+                target="_blank"
+                >the official report</a
+              >. One of the 10 critical metrics is "Getting Electricity."
+              Continue reading to learn more about the impact of electricity on
+              local business and why the solution is in
+              <span>renewable energy</span>.
             </p>
           </div>
         </section>
       </article>
+      <hr class="break" />
 
-    <script src="graph-scroll.js"></script>
+      <!--
+        <div id="container" class="container-1">
+          <div id="graph">
+              <header class="part-header">
+                  <p>Section 1</p>
+                  <h3>What is the Ease of Doing Business Index?</h3>
+                </header>
+
+          </div>
+          <div id="sections">
+            <div class="blank">.</div>
+            <div class="text-content">
+              <h4 class="sub-header">Origin</h4>
+              <p>
+                Created at the World Bank, the ease of doing business score and
+                subsequent ranking means the "regulatory environment is more
+                conducive to the starting and operation of a local firm."
+              </p>
+              <p>
+                The rankings are determined by sorting the aggregate scores on 10
+                topics, each consisting of several indicators, giving equal weight
+                to each topic.
+              </p>
+              <p>
+                The index takes the scores from 190 countries and ranks them in
+                order of difficulty. A score of 1 corresponds to the easiest
+                regulatory environment and a score of 190 is the most difficult.
+              </p>
+              <ul>
+                Starting a Business Dealing with Construction Permits Getting
+                Electricity Registering Property Getting Credit Protecting Minority
+                Investors Paying Taxes Trading across Borders Enforcing Contracts
+                Resolving Insolvency
+              </ul>
+            </div>
+            <div class="text-content">
+              <h4 class="sub-header">Why is a high score important?</h4>
+              <p>
+                Currently New Zealand holds the number 1 ranking and Somalia has
+                harshest business environment at 190.
+              </p>
+              <p></p>
+            </div>
+            <div class="text-content">
+              <h4 class="sub-header">Subheader</h4>
+
+              <p>
+                kaflaf kjvnajkvnava kaflaf kjvnajkvnavakaflaf kjvnajkvnavakaflaf
+                kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
+                kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
+                kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
+                kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava
+              </p>
+            </div>
+            <div class="text-content last">
+              <h4 class="sub-header">Subheader</h4>
+              <p>
+                kaflaf kjvnajkvnava kaflaf kjvnajkvnavakaflaf kjvnajkvnavakaflaf
+                kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
+                kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
+                kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava kaflaf
+                kjvnajkvnava kaflaf kjvnajkvnava kaflaf kjvnajkvnava
+              </p>
+              <div class="keep-scrolling">
+                <h4 class="sub-header">↓ Keep Scrolling ↓</h4>
+                <p>
+                  Next let's look at the correlation between Ease of Doing Business
+                  and Access to Electricity.
+                </p>
+              </div>
+            </div>
+            <p class="final">.</p>
+          </div>
+        </div>
+        <hr class="break"/>
+      -->
+
+      <div id="container" class="container-2">
+        <div id="graph">
+          <header class="part-header">
+            <p>Part 1</p>
+            <h4>
+              Ease of Doing Business and <span>access to electricity</span>
+            </h4>
+          </header>
+          <!-- svg goes here -->
+        </div>
+        <div id="sections">
+          <div class="blank">.</div>
+          <div class="text-content">
+            <h5 class="sub-header">All Countries</h5>
+            <p>
+              If we plot every country's Ease of Doing Business ranking against
+              their access to electricity percentage, it's clear there's a
+              linear relationship. <br /><br />The countries that have high
+              access to electricity have a better Doing Business score.
+            </p>
+          </div>
+          <div class="text-content">
+            <h5 class="sub-header">Top 50 Easiest Countries to Do Business</h5>
+            <p>
+              Take a look at the cluster of countries in the bottom right of
+              this plot. The 50 best countries to do business in all have
+              <strong>100%</strong> access to electricity<br /><br />What about
+              Sub-Saharan Africa?
+            </p>
+          </div>
+          <div class="text-content">
+            <h5 class="sub-header">Sub-Saharan Africa</h5>
+            <p>
+              Sub-Saharan Africa is spread out across the board, but the linear
+              relationship is clearly present here. The more electrified a
+              country is, the easier is it to do business.<br /><br />Let's
+              focus on a smaller subset
+            </p>
+          </div>
+          <div class="text-content last">
+            <h5 class="sub-header">
+              Less Than 25% Access to Electricity in Sub-Saharan Africa
+            </h5>
+            <p>
+              13 Sub-Saharan African countries have less than 25% access to
+              electricity. All of them also fall within the 30% hardest
+              countries to do business in in the world, with an average ranking
+              of <strong>163</strong> of 190.
+            </p>
+
+            <p>
+              Luckily, there's an opportunity. In many of these countries,
+              there's some of the highest<span>
+                <strong>renewable potential in the entire world</strong>.
+              </span>
+              Africa accounts for more solar irradiance than any other continent
+              and in many countries exceeds the minimum requirements for wind
+              power.
+            </p>
+            <div class="keep-scrolling mobile-hide">
+              <h5 class="sub-header">↓ Keep Scrolling ↓</h5>
+              <p>
+                Next let's look at a map to see natural
+                <span>renewable energy potential</span> in Africa.
+              </p>
+            </div>
+          </div>
+
+          <!--
+            <div class="text-content last">
+              <h4 class="sub-header">A Closer Look</h4>
+              <p>
+                Let's take a closer look at three Sub-Saharan African countries that
+                have some of the harshest business environments and least access to
+                electricity:
+              </p>
+
+              <ul>
+                <li>
+                  <strong>Chad:</strong> 9% Access to Elecricity // 180 Ease of
+                  Doing Business Ranking
+                </li>
+                <li>
+                  <strong>Niger:</strong> 16% Access to Elecricity // 150 Ease of
+                  Doing Business Ranking
+                </li>
+                <li>
+                  <strong>Mozambique:</strong> 24% Access to Elecricity // 137 Ease
+                  of Doing Business Ranking
+                </li>
+              </ul>
+              <p>
+                How can these countries improve their ability to do business and
+                their access to electricity at the same time? By taking advantage of
+                their natural <span>renewable energy potential.</span>
+              </p>
+              <p>
+                As mounting concerns about climate and reliance on fossil fuels
+                increase, so have the necessary technological advancements that
+                allow cost-efficient renewable infrustructure from solar, wind, and
+                biomass sources to be possible. While we still have to make more
+                strides to make a world of only renewable energy, it's time to
+                analyze our untapped potential. As turns out, some of the highest
+                natural solar and wind potential fall on some of the poorest
+                Sub-Saharan African countries.
+              </p>
+            </div>
+          -->
+          <p class="final">.</p>
+        </div>
+      </div>
+      <hr class="break" />
+
+      <div id="container" class="container-3">
+        <div id="graph">
+          <header class="part-header">
+            <p>Part 2</p>
+            <h4>
+              <span>Renewable Energy Potential</span> in Sub-Saharan Africa
+            </h4>
+          </header>
+          <div id="map"><!-- mapbox goes here --></div>
+          <!-- svg goes here -->
+        </div>
+        <div id="sections">
+          <div class="blank">.</div>
+          <div class="text-content">
+            <h5 class="sub-header">A look at the World's Potential</h5>
+            <p>
+              In order to see just how great Africa's renewable potential is,
+              take a look at the map.
+            </p>
+          </div>
+          <div class="text-content">
+            <h5 class="sub-header">A Closer Look at Africa's Potential</h5>
+            <p>
+              The map of Africa displays the amount combined solar and wind
+              energy potential for each African country measured in TWh/year per
+              Km<sup>2</sup>
+            </p>
+            <p>
+              The Sub-Saharan African countries with less than 25% access to
+              electricity mentioned above are outlined on the map in
+              <span>bright green</span>.
+            </p>
+            <p class="mobile-hide">
+              ← Hover over the countries on the map to see just how much
+              potential they have. ←
+            </p>
+          </div>
+          <div class="text-content">
+            <h5 class="sub-header">Chad</h5>
+            9% Access to Elecricity // 180 Ease of Doing Business Ranking
+            <br /><br />
+            <h6>Solar and Wind Energy Potential</h6>
+            <ul>
+              <li>
+                Solar
+                <ul>
+                  <li>(CSP): 10,284 TWh/year</li>
+                  <li>(PV): 10,506 TWh/year</li>
+                  <li>Total Solar: 10,506 TWh/year</li>
+                </ul>
+              </li>
+              <li>Wind: 9,165 TWh/year</li>
+              <li><strong>Total Potential: 29,955 TWh/year</strong></li>
+            </ul>
+            <p>
+              So how much is 29,955 TWh/year? That's the equivalent of about 2
+              Million KWh/year for Chad per capita. To put that in perspective,
+              the average United States resident uses about 12,000 KWh/year.
+            </p>
+          </div>
+          <div class="text-content">
+            <h5 class="sub-header">Niger</h5>
+            <p>[Duplicate for Niger]</p>
+          </div>
+          <div class="text-content">
+            <h5 class="sub-header">Mozambique</h5>
+            <p>[Duplicate for Mozambique]</p>
+          </div>
+          <div class="text-content last">
+            <h5 class="sub-header">Conclusion</h5>
+            <p>[insert conclusion once content is finalized]</p>
+          </div>
+          <p class="final">.</p>
+        </div>
+      </div>
+
+      <hr class="break" />
+
+      <article class="begin">
+        <section class="intro">
+          <div class="prompt">
+            <h3>
+              Acting on <span>renewable energy potential</span> will improve the
+              ease of doing business in Sub-Saharan Africa.
+            </h3>
+          </div>
+          <div class="written">
+            <p>
+              Summary paragraph. Summary paragraph. Summary paragraph. Summary
+              paragraph. Summary paragraph. Summary paragraph. Summary
+              paragraph. Summary paragraph. Summary paragraph. Summary
+              paragraph. Summary paragraph. Summary paragraph. Summary
+              paragraph. Summary paragraph.
+            </p>
+            <p>
+              Summary paragraph. Summary paragraph. Summary paragraph. Summary
+              paragraph. Summary paragraph. Summary paragraph. Summary
+              paragraph. Summary paragraph. Summary paragraph. Summary
+              paragraph. Summary paragraph. Summary paragraph. Summary
+              paragraph. Summary paragraph.
+            </p>
+          </div>
+          <div class="footnotes">
+            <hr class="footer" />
+            <h6>Data Sources, Methodology, and Foot Notes</h6>
+            <p>All data was collected at...</p>
+            <p>The methodology was to...</p>
+            <p>This story was created as an academic project...</p>
+
+            <p>Footnotes:</p>
+            <ol>
+              <li>Footnote 1</li>
+              <li>Footnote 2</li>
+            </ol>
+          </div>
+        </section>
+      </article>
+    </div>
+
+    <script src="scripts/graph-scroll.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="script.js"></script>
-    <script src="africa.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/africa.js"></script>
   </body>
 </html>

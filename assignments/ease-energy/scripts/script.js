@@ -41,7 +41,7 @@ let marginRight = 100;
 let width, height;
 
 if (window.innerWidth < 925) {
-  width = window.innerWidth * 0.95 - margin;
+  width = window.innerWidth * 0.9 - margin;
   height = window.innerHeight * 0.75;
 } else {
   width = window.innerWidth * 0.55 - margin;
@@ -298,7 +298,7 @@ let svg = (data, firstGraph, secondGraph) => {
     .append("g")
     .attr("id", "yAxisTitle")
     .append("text")
-    .text("Ease of Doing Business Index (1 - 190) 1 = Easiest")
+    .text("Ease of Doing Business Rank")
     .attr("x", margin + 10)
     .attr("y", margin + 5);
 
@@ -397,7 +397,7 @@ let svg = (data, firstGraph, secondGraph) => {
     .graph(d3.selectAll(".container-2 #graph"))
     .eventId("uniqueId2") // namespace for scroll and resize events
     .sections(d3.selectAll(".container-2 #sections > div"))
-    // .offset(3000)
+    // .offset(500)
     .on("active", function(i) {
       if (i == 0) {
         resetClasses();
@@ -407,9 +407,8 @@ let svg = (data, firstGraph, secondGraph) => {
         points.attr("class", "up");
       } else if (i == 2) {
         resetClasses();
-        // points.classed("inacactive", true);
         points.attr("class", d => {
-          return d.access == 100 && d.ease <= 50 ? "special" : "up";
+          return d.access == 100 && d.ease <= 50 ? "special" : "inactive";
         });
         points.classed("active", d => {
           return d.ease == 1 || d.ease == 50;

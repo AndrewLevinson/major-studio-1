@@ -7,8 +7,13 @@ variables for color */
   --main-bg-color: #f8efe7;
   --green-color: #009f29;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 html {
-  font-size: 62.5%;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -17,75 +22,13 @@ html {
 body {
   overflow-x: hidden;
   height: 100%;
-  font-size: 2.1rem;
-  line-height: 1.7em;
-  -webkit-font-smoothing: antialiased;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
-}
-
-body,
-g {
-  font-family: monospace;
-  font-weight: 400;
   background: var(--main-bg-color);
+  /* margin: 0; */
+}
+
+.wrapper {
   margin: 0;
-}
-g {
-  font-size: 1.4rem;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "IBM Plex Mono", monospace;
-}
-
-h1 {
-  font-size: 43.6rem;
-  line-height: 1.2;
-  letter-spacing: -0.1rem;
-}
-
-h2 {
-  font-size: 3rem;
-  line-height: 1.25;
-  letter-spacing: -0.1rem;
-}
-
-h3 {
-  font-size: 2.4rem;
-  line-height: 1.3;
-  letter-spacing: -0.1rem;
-}
-
-h4 {
-  font-size: 1.8rem;
-  line-height: 1.35;
-  letter-spacing: -0.08rem;
-}
-
-h5 {
-  font-size: 1.5rem;
-  line-height: 1.5;
-  letter-spacing: -0.05rem;
-}
-
-h6 {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  letter-spacing: 0;
-}
-
-p,
-ul,
-li {
-  /* font-size: 1.2rem;
-  line-height: 1.75em; */
-  font-family: "Rubik", sans-serif;
-  color: #3d3d3d;
+  width: 100%;
 }
 
 a {
@@ -102,9 +45,9 @@ a:hover {
 
 .begin {
   width: 100%;
-  min-height: -mox-calc(100% - 16px);
+  /* min-height: -mox-calc(100% - 16px);
   min-height: -webkit-calc(100% - 16px);
-  min-height: calc(100% - 16px);
+  min-height: calc(100% - 16px); */
   align-items: center;
   margin-top: 10%;
 }
@@ -115,7 +58,7 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 75rem;
+  max-width: 80rem;
   min-width: 345px;
 }
 
@@ -128,7 +71,7 @@ section {
 .footnotes {
   padding: 0 10px;
   width: 100%;
-  max-width: 60rem;
+  max-width: 65rem;
   margin: 1rem auto;
 }
 
@@ -163,28 +106,26 @@ i {
 .part-header {
   margin-top: 0px;
   text-transform: uppercase;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   /* width: 500px; */
 }
 
 .part-header > p {
   opacity: 0.6;
-  line-height: 0;
-  font-size: 1.3rem;
-  margin-bottom: -20px;
+  /* line-height: 1; */
+  font-size: 1.5rem;
+  margin-bottom: -40px;
   letter-spacing: 4px;
 }
 
 .sub-header {
   border-bottom: 1px dashed #3d3d3d;
+  margin-top: 0;
 }
 
 span {
   color: var(--green-color);
 }
-/* .container-1 svg {
-  background-color: rgba(204, 204, 204, 0.336);
-} */
 
 /* scroll library */
 #sections > div {
@@ -204,12 +145,12 @@ span {
   visibility: collapse;
 }
 
+/* font is smaller for content blocks paired with visuals - see type.css */
 .text-content {
   margin-top: 60%;
   padding: 0 1rem 0 3rem;
-  font-size: 1.5rem;
-  line-height: 1.8em;
 }
+
 #graph {
   /* margin-left: 40px; */
   width: 52.5%;
@@ -349,7 +290,7 @@ button:hover {
 
 /* map style */
 #map {
-  width: 95%;
+  width: 97.5%;
   height: 75vh;
   border-radius: 10px;
 }
@@ -424,14 +365,30 @@ li::before {
   height: 60%;
 }
 
+/* media query breakpoints  */
+@media (max-width: 550px) {
+  .prompt {
+    margin-top: 0;
+  }
+  .prompt > h3 {
+    text-align: left;
+    padding: 0 10px;
+  }
+}
+
 @media (max-width: 925px) {
+  .wrapper {
+    margin: 0 auto;
+    width: 95%;
+  }
+
   .minis {
     display: block;
   }
 
   #graph {
-    width: 95%;
-    margin-left: 5%;
+    width: 97.5%;
+    margin-left: 2.5%;
     /* transform: translate(0%, 18%); */
     background-color: #f8efe7;
     z-index: 0;
@@ -440,24 +397,38 @@ li::before {
   #sections {
     position: relative;
     margin: 0px auto;
-    padding-top: 10%;
-    width: 75%;
+    /* padding-top: 10%; */
+    /* padding-top: 400px; */
+    width: 90%;
     z-index: 999;
   }
+
   .text-content {
-    background-color: rgba(255, 255, 255, 0.9);
+    /* background-color: rgba(255, 255, 255, 0.9); */
+    /* background-color: rgba(247, 232, 218, 0.9); */
+    background-color: var(--main-bg-color);
     border-radius: 8px;
     filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.5));
-    padding: 10px;
+    padding: 5%;
   }
 
   .final {
     height: 100px;
   }
+
   .up text,
   .inactive text,
   .hidden text {
     font-size: 0%;
     transition: all 0.6s;
+  }
+
+  .mobile-hide {
+    display: none;
+  }
+
+  hr {
+    margin-top: 80px;
+    margin-bottom: 80px;
   }
 }
