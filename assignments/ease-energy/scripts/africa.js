@@ -116,7 +116,7 @@ d3.json("data/africaRev.geojson").then(geojson => {
             ? "--"
             : numFormatT(d.properties.easedb) + " of 190"
         }<br>
-        <b><span>Solar & Wind Potential</span></b><br>
+        <b><span class="green">Solar & Wind Potential</span></b><br>
         Total Potential: 
         ${numFormatT(d.properties.totaltwh)} TWh/year<br>
         Per Capita: ${numFormatT(
@@ -132,7 +132,6 @@ d3.json("data/africaRev.geojson").then(geojson => {
       tooltip.move();
     })
     .on("mouseout", function(d, i) {
-      //createStuff();
       tooltip.hide();
     });
 

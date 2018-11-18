@@ -123,8 +123,13 @@ i {
   margin-top: 0;
 }
 
-span {
+span.green {
   color: var(--green-color);
+}
+
+span.small {
+  text-transform: lowercase;
+  letter-spacing: normal;
 }
 
 /* scroll library */
@@ -315,7 +320,7 @@ div.tooltip {
   padding: 8px;
   font-size: 13px;
   line-height: 1.2;
-  /* font-family: "Rubik", sans-serif; */
+  font-family: monospace;
 
   background-color: #000;
   border: 0px;
@@ -369,8 +374,6 @@ li::before {
 @media (max-width: 550px) {
   .prompt {
     margin-top: 0;
-  }
-  .prompt > h3 {
     text-align: left;
     padding: 0 10px;
   }

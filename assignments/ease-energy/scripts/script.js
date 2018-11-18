@@ -10,6 +10,8 @@
 // solve for overplotting
 // footnotes and data sources
 // data gutcheck
+// update link style
+// update responsive map svg(geo) and scatter svg
 
 // load data
 const rawData = d3.csv("data/cleaned/master_cleaned.csv", d => {
@@ -40,8 +42,12 @@ let marginBottom = 0;
 let marginRight = 100;
 let width, height;
 
-if (window.innerWidth < 925) {
-  width = window.innerWidth * 0.9 - margin;
+// update svg sizing to work with breakpoints in css media queries
+if (window.innerWidth <= 550) {
+  width = window.innerWidth * 0.925;
+  height = window.innerHeight * 0.75;
+} else if (window.innerWidth <= 925) {
+  width = window.innerWidth * 0.925 - margin;
   height = window.innerHeight * 0.75;
 } else {
   width = window.innerWidth * 0.55 - margin;
@@ -266,6 +272,7 @@ let svg = (data, firstGraph, secondGraph) => {
   // second chart
   // scatter plot
   // linear scale x
+
   let x = d3
     .scaleLinear()
     .domain([0, 100])
@@ -377,7 +384,7 @@ let svg = (data, firstGraph, secondGraph) => {
 
   let yAxis = g =>
     g
-      .attr("transform", `translate(${margin + 6},0)`)
+      .attr("transform", `translate(${margin + 7},0)`)
       .call(d3.axisLeft(y))
       .attr("id", "xAxis");
 
@@ -442,6 +449,8 @@ let svg = (data, firstGraph, secondGraph) => {
       }
     });
 };
+
+// d3.select(window).on("resize", resizeCharts);
 
 // var oldWidth = 0;
 // function render() {
