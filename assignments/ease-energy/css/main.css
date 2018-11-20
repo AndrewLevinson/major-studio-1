@@ -330,20 +330,6 @@ div.tooltip {
   filter: drop-shadow(0px 8px 16px #000);
 }
 
-ul {
-  list-style: none;
-  margin-bottom: 5%;
-}
-
-li::before {
-  content: "•";
-  color: #ff7233;
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-  font-size: 2em;
-}
-
 .top-green > rect {
   fill: var(--green-color);
 }
@@ -434,4 +420,61 @@ li::before {
     margin-top: 80px;
     margin-bottom: 80px;
   }
+}
+
+/* ul {
+  list-style: none;
+  margin-bottom: 5%;
+} */
+/* 
+li::before {
+  content: "•";
+  color: #ff7233;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  font-size: 2em;
+} */
+
+table {
+  font-family: monospace;
+  text-align: right;
+  vertical-align: bottom;
+  margin: 10% 0 10% 0;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+th,
+.bottom {
+  border-bottom: 1px dashed #3d3d3d;
+}
+
+.double {
+  border-bottom: 2px solid #3d3d3d;
+}
+.total {
+  font-weight: 600;
+}
+
+caption {
+  text-align: right;
+  font-size: 110%;
+}
+
+td {
+  padding: 0 0.4rem 0 0.4rem;
+}
+
+.positive {
+  color: var(--green-color);
+}
+.negative {
+  color: lightcoral;
 }
