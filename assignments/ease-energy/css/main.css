@@ -1,11 +1,7 @@
-/* to do:
-typography
-responsive/media queries
-variables for color */
-
 * {
   --main-bg-color: #f8efe7;
   --green-color: #009f29;
+  --negative-color: #9f0037;
 }
 
 *,
@@ -23,7 +19,6 @@ body {
   overflow-x: hidden;
   height: 100%;
   background: var(--main-bg-color);
-  /* margin: 0; */
 }
 
 .wrapper {
@@ -229,7 +224,7 @@ button:hover {
 }
 .up text {
   fill: #000;
-  font-size: 100%;
+  font-size: 0%;
   opacity: 0.85;
   transition: all 0.6s;
 }
@@ -289,9 +284,17 @@ button:hover {
 }
 .active text {
   fill: #000;
-  font-size: 110%;
+  font-size: 100%;
   opacity: 1;
   transition: all 0.6s;
+}
+
+.positive circle {
+  fill: var(--green-color);
+}
+
+.negative circle {
+  fill: var(--negative-color);
 }
 
 /* map style */
@@ -476,6 +479,7 @@ td {
 .positive {
   color: var(--green-color);
 }
+
 .negative {
-  color: lightcoral;
+  color: var(--negative-color);
 }

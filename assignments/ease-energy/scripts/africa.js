@@ -19,7 +19,7 @@ d3.json("data/africaRev.geojson").then(geojson => {
     .select(container)
     .append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height + 15);
 
   let transform = d3.geoTransform({ point: projectPoint }); // https://bl.ocks.org/Andrew-Reid/496078bd5e37fd22a9b43fd6be84b36b
   let path = d3.geoPath().projection(transform); // https://github.com/d3/d3-3.x-api-reference/blob/master/Geo-Paths.md
@@ -28,9 +28,14 @@ d3.json("data/africaRev.geojson").then(geojson => {
   let capitaMax = 0.002;
   let areaMax = 0.05;
 
-  let colorScale = d3
+  let colorScaleGreen = d3
     .scaleSequential(d3.interpolateGreens)
     .domain([domainMin, areaMax]);
+
+  // need to fix below color
+  let colorScalePurple = d3
+    .scaleSequential(d3.interpolateRdBu)
+    .domain([0, 50, 100]);
 
   let featureElement = svgAfrica
     .selectAll("path")
@@ -40,30 +45,21 @@ d3.json("data/africaRev.geojson").then(geojson => {
     .attr("d", d3.geoPath().projection(transform))
     .attr("stroke", "none")
     .attr("fill", function(d) {
-      return d.properties.totaltwh == 0
-        ? "grey"
-        : colorScale(d.properties.totaltwh / d.properties.areakm); // per area
+      return d.properties.totaltwh == 0 ||
+        d.properties.region_wb != "Sub-Saharan Africa"
+        ? "#696969"
+        : colorScaleGreen(d.properties.totaltwh / d.properties.areakm); // per area
     })
-    .attr("fill-opacity", 0.5)
-    .attr("stroke", function(d, i) {
-      if (
-        d.properties.name == "S. Sudan" ||
-        d.properties.name == "Mozambique" ||
-        d.properties.name == "Niger" ||
-        d.properties.name == "Dem. Rep. Congo" ||
-        d.properties.name == "Chad" ||
-        d.properties.name == "Burkina Faso" ||
-        d.properties.name == "Malawi" ||
-        d.properties.name == "Madagascar" ||
-        d.properties.name == "Central African Rep." ||
-        d.properties.name == "Guinea-Bissau" ||
-        d.properties.name == "Sierra Leone" ||
-        d.properties.name == "Burundi" ||
-        d.properties.name == "Liberia"
-      ) {
-        return "#00FF40";
-      }
-    });
+    .attr("fill-opacity", 0.5);
+
+  // stroke
+  // .attr("stroke", function(d) {
+  //   return d.properties.access == 0 ||
+  //     d.properties.region_wb != "Sub-Saharan Africa"
+  //     ? "none"
+  //     : colorScalePurple(d.properties.access); // percent access
+  // })
+  // .attr("stroke-opacity", 1);
 
   // tooltip method
   var tooltip = {
@@ -130,9 +126,34 @@ d3.json("data/africaRev.geojson").then(geojson => {
     })
     .on("mousemove", function(d, i) {
       tooltip.move();
+      featureElement.attr("fill-opacity", 0.3);
+      d3.select(this).attr("fill-opacity", 0.7);
     })
     .on("mouseout", function(d, i) {
       tooltip.hide();
+      featureElement
+        .attr("fill", function(d) {
+          return d.properties.totaltwh == 0 ||
+            d.properties.region_wb != "Sub-Saharan Africa"
+            ? "#696969"
+            : colorScaleGreen(d.properties.totaltwh / d.properties.areakm); // per area
+        })
+        .attr("fill-opacity", 0.5);
+    })
+    .on("click", function(d, i) {
+      // console.log(d.geometry.coordinates[0][0][0]);
+
+      const getName = document.getElementById("name");
+      getName.innerHTML = `${d.properties.name}`;
+
+      map.on("click", function(e) {
+        let getLat = e.lngLat.lat;
+        let getLng = e.lngLat.lng;
+        map.flyTo({
+          center: [getLng, getLat], // africa
+          zoom: 3.5
+        });
+      });
     });
 
   // svgAfrica.append("text").attr("id", "hover");
@@ -159,6 +180,18 @@ d3.json("data/africaRev.geojson").then(geojson => {
     this.stream.point(point.x, point.y);
   }
 
+  function resetStrokeAndFill() {
+    featureElement
+      .attr("stroke", "none")
+      .attr("fill", function(d) {
+        return d.properties.totaltwh == 0 ||
+          d.properties.region_wb != "Sub-Saharan Africa"
+          ? "#696969"
+          : colorScaleGreen(d.properties.totaltwh / d.properties.areakm); // per area
+      })
+      .attr("fill-opacity", 0.5);
+  }
+
   d3.graphScroll()
     .container(d3.select(".container-3"))
     .graph(d3.selectAll(".container-3 #graph"))
@@ -175,19 +208,97 @@ d3.json("data/africaRev.geojson").then(geojson => {
       console.log("map", i);
 
       if (i == 2) {
-        // colorScale.domain([domainMin, areaMax]);
-        // featureElement.transition().attr("fill", function(d) {
-        //   return d.properties.totaltwh == 0
-        //     ? "grey"
-        //     : colorScale(d.properties.totaltwh / d.properties.areakm);
-        // });
+        resetStrokeAndFill();
         map.flyTo({
-          center: [18.2812, 9.1021],
-          zoom: 2.4
+          center: [18.2812, 4.0], // africa
+          zoom: 2.2
         });
       } else if (i == 3) {
+        // position
         map.flyTo({
-          center: [18.7322, 15.4542],
+          center: [18.2812, 4.0], // africa
+          zoom: 2.2
+        });
+        //stroke
+        resetStrokeAndFill();
+        featureElement.attr("stroke", function(d) {
+          if (
+            d.properties.name == "Gabon" ||
+            d.properties.name == "Cape Verde" ||
+            d.properties.name == "South Africa" ||
+            d.properties.name == "Seychelles" ||
+            d.properties.name == "Mauritius"
+          ) {
+            return "#00FF40";
+          }
+        });
+
+        featureElement.attr("fill-opacity", function(d) {
+          if (
+            d.properties.name == "Gabon" ||
+            d.properties.name == "Cape Verde" ||
+            d.properties.name == "South Africa" ||
+            d.properties.name == "Seychelles" ||
+            d.properties.name == "Mauritius"
+          ) {
+            return 0.7;
+          } else {
+            return 0.3;
+          }
+        });
+      } else if (i == 4) {
+        // position
+        map.flyTo({
+          center: [18.2812, 4.0], // africa
+          zoom: 2.2
+        });
+        // stroke and fill
+        resetStrokeAndFill();
+        featureElement.attr("stroke", function(d) {
+          if (
+            d.properties.name == "S. Sudan" ||
+            d.properties.name == "Mozambique" ||
+            d.properties.name == "Niger" ||
+            d.properties.name == "Dem. Rep. Congo" ||
+            d.properties.name == "Chad" ||
+            d.properties.name == "Burkina Faso" ||
+            d.properties.name == "Malawi" ||
+            d.properties.name == "Madagascar" ||
+            d.properties.name == "Central African Rep." ||
+            d.properties.name == "Guinea-Bissau" ||
+            d.properties.name == "Sierra Leone" ||
+            d.properties.name == "Burundi" ||
+            d.properties.name == "Liberia"
+          ) {
+            // return "#FF0059";
+            return "#00FF40";
+          }
+        });
+        featureElement.attr("fill-opacity", function(d) {
+          if (
+            d.properties.name == "S. Sudan" ||
+            d.properties.name == "Mozambique" ||
+            d.properties.name == "Niger" ||
+            d.properties.name == "Dem. Rep. Congo" ||
+            d.properties.name == "Chad" ||
+            d.properties.name == "Burkina Faso" ||
+            d.properties.name == "Malawi" ||
+            d.properties.name == "Madagascar" ||
+            d.properties.name == "Central African Rep." ||
+            d.properties.name == "Guinea-Bissau" ||
+            d.properties.name == "Sierra Leone" ||
+            d.properties.name == "Burundi" ||
+            d.properties.name == "Liberia"
+          ) {
+            return 0.7;
+          } else {
+            return 0.3;
+          }
+        });
+      } else if (i == 5) {
+        resetStrokeAndFill();
+        map.flyTo({
+          center: [18.7322, 15.4542], // chad
           zoom: 4.5
         });
         // colorScale.domain([domainMin, capitaMax]);
@@ -196,17 +307,8 @@ d3.json("data/africaRev.geojson").then(geojson => {
         //     ? "grey"
         //     : colorScale(d.properties.totaltwh / d.properties.pop_2017);
         // });
-      } else if (i == 3) {
-        map.flyTo({
-          center: [8.0817, 17.6078],
-          zoom: 4.5
-        });
-      } else if (i == 4) {
-        map.flyTo({
-          center: [35.5296, -18.6657],
-          zoom: 4.5
-        });
       } else {
+        resetStrokeAndFill();
         map.flyTo({
           center: [18.2812, 9.1021],
           zoom: 1
