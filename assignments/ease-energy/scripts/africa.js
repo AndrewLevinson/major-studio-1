@@ -292,8 +292,12 @@ d3.json("data/africaRev.geojson").then(geojson => {
       } else if (i == 5) {
         hide = true;
         resetStrokeAndFill();
+
+        // country selector
         let countryTable = document.querySelector(".countryTable");
         let analysisP = document.getElementById("analysis");
+        let activeCountry = document.getElementById("name");
+        activeCountry.innerHTML = `Comparing Energy Potential`;
         analysisP.innerHTML = ``;
         countryTable.innerHTML = `<div class="emptyState"><p>← ← ←<br>Select a country on the map to see how its potential compares to the United States<br>← ← ←</p></div>`;
 
@@ -302,10 +306,6 @@ d3.json("data/africaRev.geojson").then(geojson => {
           resetStrokeAndFill();
           d3.select(this).attr("stroke", "#00FF40");
 
-          // dynamically set title of active country
-          let activeCountry = document.getElementById("name");
-          activeCountry.innerHTML = `${d.properties.name}`;
-
           // fly to clicked country
           map.on("click", function(e) {
             map.flyTo({
@@ -313,6 +313,10 @@ d3.json("data/africaRev.geojson").then(geojson => {
               zoom: 3.5
             });
           });
+
+          // dynamically set title to active country
+          let activeCountry = document.getElementById("name");
+          activeCountry.innerHTML = `${d.properties.name}`;
 
           // dynamically build HTML table and analysis paragraph
           let countryTable = document.querySelector(".countryTable");
@@ -370,11 +374,6 @@ d3.json("data/africaRev.geojson").then(geojson => {
             d.properties.access
           }%</span> access to electricity.`;
         });
-
-        // ${d.properties.name} has ${numFormatT(
-        //   (d.properties.totaltwh / d.properties.areakm) * 1000000000
-        // )} KWh/year per square kilometer. The average United States resident uses about 12,000 KWh/year.<br><br>
-
         map.flyTo({
           // center: [18.7322, 15.4542], // chad
           // zoom: 4.5
