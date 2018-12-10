@@ -1,3 +1,5 @@
+let hide;
+
 d3.json("data/africaRev.geojson").then(geojson => {
   // https://www.mapbox.com/mapbox-gl-js/api/#accesstoken
   mapboxgl.accessToken =
@@ -112,22 +114,13 @@ d3.json("data/africaRev.geojson").then(geojson => {
             ? "--"
             : numFormatT(d.properties.easedb) + " of 190"
         }<br>
-        <b><span class="green">Solar & Wind Potential</span></b><br>
-        Total Potential: 
-        ${numFormatT(d.properties.totaltwh)} TWh/year<br>
-        Per Capita: ${numFormatT(
-          (d.properties.totaltwh * 1000000000) / d.properties.pop_2017
-        )} KWh/year<br>
-        Per KM<sup>2</sup>: ${numFormatT(
-          (d.properties.totaltwh * 1000000000) / d.properties.areakm
-        )} KWh/year
-        `
+       `
       );
     })
     .on("mousemove", function(d, i) {
       tooltip.move();
-      featureElement.attr("fill-opacity", 0.3);
-      d3.select(this).attr("fill-opacity", 0.7);
+      featureElement.attr("fill-opacity", 0.5);
+      d3.select(this).attr("fill-opacity", 0.8);
     })
     .on("mouseout", function(d, i) {
       tooltip.hide();
@@ -139,24 +132,18 @@ d3.json("data/africaRev.geojson").then(geojson => {
             : colorScaleGreen(d.properties.totaltwh / d.properties.areakm); // per area
         })
         .attr("fill-opacity", 0.5);
-    })
-    .on("click", function(d, i) {
-      // console.log(d.geometry.coordinates[0][0][0]);
-
-      const getName = document.getElementById("name");
-      getName.innerHTML = `${d.properties.name}`;
-
-      map.on("click", function(e) {
-        let getLat = e.lngLat.lat;
-        let getLng = e.lngLat.lng;
-        map.flyTo({
-          center: [getLng, getLat], // africa
-          zoom: 3.5
-        });
-      });
     });
 
-  // svgAfrica.append("text").attr("id", "hover");
+  // old tooltip code to show energy potential
+  // <b><span class="green">Solar & Wind Potential</span></b><br>
+  // Total Potential:
+  // ${numFormatT(d.properties.totaltwh)} TWh/year<br>
+  // Per Capita: ${numFormatT(
+  //   (d.properties.totaltwh * 1000000000) / d.properties.pop_2017
+  // )} KWh/year<br>
+  // Per KM<sup>2</sup>: ${numFormatT(
+  //   (d.properties.totaltwh * 1000000000) / d.properties.areakm
+  // )} KWh/year
 
   function update() {
     featureElement.attr("d", path);
@@ -164,7 +151,11 @@ d3.json("data/africaRev.geojson").then(geojson => {
 
   map.on("viewreset", update);
   map.on("movestart", function() {
-    svgAfrica.classed("hide-map", true);
+    if (!hide) {
+      svgAfrica.classed("hide-map", false);
+    } else {
+      svgAfrica.classed("hide-map", true);
+    }
   });
   map.on("rotate", function() {
     svgAfrica.classed("hide-map", true);
@@ -214,6 +205,8 @@ d3.json("data/africaRev.geojson").then(geojson => {
           zoom: 2.2
         });
       } else if (i == 3) {
+        hide = true;
+
         // position
         map.flyTo({
           center: [18.2812, 4.0], // africa
@@ -247,6 +240,7 @@ d3.json("data/africaRev.geojson").then(geojson => {
           }
         });
       } else if (i == 4) {
+        hide = true;
         // position
         map.flyTo({
           center: [18.2812, 4.0], // africa
@@ -296,10 +290,96 @@ d3.json("data/africaRev.geojson").then(geojson => {
           }
         });
       } else if (i == 5) {
+        hide = true;
         resetStrokeAndFill();
+        let countryTable = document.querySelector(".countryTable");
+        let analysisP = document.getElementById("analysis");
+        analysisP.innerHTML = ``;
+        countryTable.innerHTML = `<div class="emptyState"><p>← ← ←<br>Select a country on the map to see how its potential compares to the United States<br>← ← ←</p></div>`;
+
+        // click on country to build energy profile
+        featureElement.on("click", function(d, i) {
+          resetStrokeAndFill();
+          d3.select(this).attr("stroke", "#00FF40");
+
+          // dynamically set title of active country
+          let activeCountry = document.getElementById("name");
+          activeCountry.innerHTML = `${d.properties.name}`;
+
+          // fly to clicked country
+          map.on("click", function(e) {
+            map.flyTo({
+              center: [e.lngLat.lng, e.lngLat.lat],
+              zoom: 3.5
+            });
+          });
+
+          // dynamically build HTML table and analysis paragraph
+          let countryTable = document.querySelector(".countryTable");
+          countryTable.innerHTML = `<caption>
+        </caption>
+        <thead>
+     
+          <tr>
+         <th class="left">Metrics</th>
+            <th class="right" colspan="1">${d.properties.name}</th>
+            <th class="right">USA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left tick">Business Ranking</td>
+            <td class="negative">${d.properties.easedb}</td>
+            <td class="positive">5</td>
+          </tr>
+          <tr>
+            <td class="left tick bottom">Electrification %</td>
+            <td class="negative bottom">${d.properties.access}%</td>
+            <td class="positive bottom">100%</td>
+          </tr>
+          <tr class="table-break">
+            <td class="left total bottom" colspan="3">Annual Energy Potential in Millions</td>
+          </tr>
+    
+          <tr>
+            <td class="left tick">Per Capita (KWh)</td>
+            <td>${numFormatF(
+              ((d.properties.totaltwh / d.properties.pop_2017) * 1000000000) /
+                1000000
+            )}</td>
+            <td>${numFormatF((0.001380319312251 * 1000000000) / 1000000)}</td>
+          </tr>
+          <tr>
+            <td class="left tick bottom">Per Km<sup>2</sup> (KWh)</td>
+            <td class="bottom">${numFormatF(
+              ((d.properties.totaltwh / d.properties.areakm) * 1000000000) /
+                1000000
+            )}</td>
+            <td class="bottom">${numFormatF(
+              (0.045678932691726 * 1000000000) / 1000000
+            )}</td>
+        </tbody>`;
+
+          let analysisP = document.getElementById("analysis");
+          analysisP.innerHTML = `Let's put this in perspective...<br><br>In a single year, there's <span class="green"><strong>${numFormatT(
+            ((d.properties.totaltwh / d.properties.areakm) * 1000000000) /
+              (12000 * 78.69)
+          )}x</strong></span> more potential energy per square kilometer in <strong>${
+            d.properties.name
+          }</strong> than the average US resident will use in their <strong>entire lifetime.</strong><br><br>And yet, they still only have <span class="negative">${
+            d.properties.access
+          }%</span> access to electricity.`;
+        });
+
+        // ${d.properties.name} has ${numFormatT(
+        //   (d.properties.totaltwh / d.properties.areakm) * 1000000000
+        // )} KWh/year per square kilometer. The average United States resident uses about 12,000 KWh/year.<br><br>
+
         map.flyTo({
-          center: [18.7322, 15.4542], // chad
-          zoom: 4.5
+          // center: [18.7322, 15.4542], // chad
+          // zoom: 4.5
+          center: [18.2812, 4.0], // africa
+          zoom: 2.2
         });
         // colorScale.domain([domainMin, capitaMax]);
         // featureElement.transition().attr("fill", function(d) {
@@ -308,6 +388,8 @@ d3.json("data/africaRev.geojson").then(geojson => {
         //     : colorScale(d.properties.totaltwh / d.properties.pop_2017);
         // });
       } else {
+        hide = true;
+
         resetStrokeAndFill();
         map.flyTo({
           center: [18.2812, 9.1021],

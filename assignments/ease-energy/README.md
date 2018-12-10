@@ -4,4 +4,6 @@ One of the biggest obstacles to effectively growing an economy is a lack of acce
 
 ---
 
+[Link to Project](https://andrewlevinson.github.io/major-studio-1/assignments/ease-energy/index.html)
+
 ![Preview Image](assets/preview.png)

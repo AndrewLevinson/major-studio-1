@@ -360,6 +360,105 @@ div.tooltip {
   height: 60%;
 }
 
+.emptyState {
+  border: 1px dashed #3d3d3d;
+  height: 65vh;
+  display: flex;
+}
+.emptyState > p {
+  align-self: center;
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+}
+
+/* ul {
+  list-style: none;
+  margin-bottom: 5%;
+} */
+/* 
+li::before {
+  content: "•";
+  color: #ff7233;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  font-size: 2em;
+} */
+
+table {
+  font-family: monospace;
+  text-align: right;
+  vertical-align: bottom;
+  margin: 10% 0 10% 0;
+  max-width: 100%;
+}
+
+.left {
+  text-align: left;
+  min-width: 180px;
+}
+
+.right {
+  text-align: right;
+}
+
+th,
+.bottom {
+  border-bottom: 1px dashed #3d3d3d;
+}
+
+th {
+  vertical-align: bottom;
+}
+
+.double {
+  border-bottom: 2px solid #3d3d3d;
+}
+.total {
+  font-weight: 600;
+}
+
+caption {
+  text-align: right;
+  font-size: 110%;
+}
+
+td {
+  padding: 0 0.4rem 0 0.4rem;
+}
+
+.positive {
+  color: var(--green-color);
+}
+
+.negative {
+  color: var(--negative-color);
+}
+
+.underline {
+  /* border-bottom: 2px dashed var(--green-color); */
+  color: var(--green-color);
+  font-weight: bold;
+}
+
+.tick {
+  text-indent: 0px;
+}
+
+.table-break {
+  height: 3.5rem;
+  vertical-align: bottom;
+}
+
+strong {
+  font-weight: 500;
+}
+
+#analysis {
+  min-height: 25vh;
+}
+
 /* media query breakpoints  */
 @media (max-width: 550px) {
   .prompt {
@@ -424,62 +523,12 @@ div.tooltip {
     margin-top: 80px;
     margin-bottom: 80px;
   }
-}
 
-/* ul {
-  list-style: none;
-  margin-bottom: 5%;
-} */
-/* 
-li::before {
-  content: "•";
-  color: #ff7233;
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-  font-size: 2em;
-} */
+  .emptyState {
+    height: 25vh;
+  }
 
-table {
-  font-family: monospace;
-  text-align: right;
-  vertical-align: bottom;
-  margin: 10% 0 10% 0;
-}
-
-.left {
-  text-align: left;
-}
-
-.right {
-  text-align: right;
-}
-
-th,
-.bottom {
-  border-bottom: 1px dashed #3d3d3d;
-}
-
-.double {
-  border-bottom: 2px solid #3d3d3d;
-}
-.total {
-  font-weight: 600;
-}
-
-caption {
-  text-align: right;
-  font-size: 110%;
-}
-
-td {
-  padding: 0 0.4rem 0 0.4rem;
-}
-
-.positive {
-  color: var(--green-color);
-}
-
-.negative {
-  color: var(--negative-color);
+  #analysis {
+    min-height: 0vh;
+  }
 }
