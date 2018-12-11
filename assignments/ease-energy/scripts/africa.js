@@ -198,14 +198,14 @@ d3.json("data/africaRev.geojson").then(geojson => {
       // }
       console.log("map", i);
 
-      if (i == 2) {
+      if (i == 1) {
         resetStrokeAndFill();
         map.flyTo({
           center: [18.2812, 4.0], // africa
           zoom: 2.2
         });
-      } else if (i == 3) {
-        hide = true;
+      } else if (i == 2) {
+        hide = false;
 
         // position
         map.flyTo({
@@ -239,8 +239,8 @@ d3.json("data/africaRev.geojson").then(geojson => {
             return 0.3;
           }
         });
-      } else if (i == 4) {
-        hide = true;
+      } else if (i == 3) {
+        hide = false;
         // position
         map.flyTo({
           center: [18.2812, 4.0], // africa
@@ -289,7 +289,7 @@ d3.json("data/africaRev.geojson").then(geojson => {
             return 0.3;
           }
         });
-      } else if (i == 5) {
+      } else if (i == 4) {
         hide = true;
         resetStrokeAndFill();
 
@@ -320,10 +320,10 @@ d3.json("data/africaRev.geojson").then(geojson => {
 
           // dynamically build HTML table and analysis paragraph
           let countryTable = document.querySelector(".countryTable");
-          countryTable.innerHTML = `<caption>
+          countryTable.innerHTML = `
+        <caption>
         </caption>
         <thead>
-     
           <tr>
          <th class="left">Metrics</th>
             <th class="right" colspan="1">${d.properties.name}</th>
@@ -334,7 +334,7 @@ d3.json("data/africaRev.geojson").then(geojson => {
           <tr>
             <td class="left tick">Business Ranking</td>
             <td class="negative">${d.properties.easedb}</td>
-            <td class="positive">5</td>
+            <td class="positive">8</td>
           </tr>
           <tr>
             <td class="left tick bottom">Electrification %</td>
@@ -344,7 +344,6 @@ d3.json("data/africaRev.geojson").then(geojson => {
           <tr class="table-break">
             <td class="left total bottom" colspan="3">Annual Energy Potential in Millions</td>
           </tr>
-    
           <tr>
             <td class="left tick">Per Capita (KWh)</td>
             <td>${numFormatF(

@@ -391,12 +391,18 @@ table {
   text-align: right;
   vertical-align: bottom;
   margin: 10% 0 10% 0;
+  width: 100%;
   max-width: 100%;
 }
 
 .left {
   text-align: left;
   min-width: 180px;
+}
+
+.left-small {
+  text-align: left;
+  /* min-width: 100px; */
 }
 
 .right {
@@ -447,7 +453,7 @@ td {
 }
 
 .table-break {
-  height: 3.5rem;
+  height: 4rem;
   vertical-align: bottom;
 }
 
