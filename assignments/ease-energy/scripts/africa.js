@@ -251,18 +251,18 @@ d3.json("data/africaRev.geojson").then(geojson => {
         featureElement.attr("stroke", function(d) {
           if (
             d.properties.name == "S. Sudan" ||
-            d.properties.name == "Mozambique" ||
-            d.properties.name == "Niger" ||
-            d.properties.name == "Dem. Rep. Congo" ||
+            // d.properties.name == "Mozambique" ||
+            // d.properties.name == "Niger" ||
+            // d.properties.name == "Dem. Rep. Congo" ||
             d.properties.name == "Chad" ||
-            d.properties.name == "Burkina Faso" ||
+            // d.properties.name == "Burkina Faso" ||
             d.properties.name == "Malawi" ||
-            d.properties.name == "Madagascar" ||
+            // d.properties.name == "Madagascar" ||
             d.properties.name == "Central African Rep." ||
-            d.properties.name == "Guinea-Bissau" ||
-            d.properties.name == "Sierra Leone" ||
-            d.properties.name == "Burundi" ||
-            d.properties.name == "Liberia"
+            // d.properties.name == "Guinea-Bissau" ||
+            // d.properties.name == "Sierra Leone" ||
+            d.properties.name == "Burundi"
+            // || d.properties.name == "Liberia"
           ) {
             // return "#FF0059";
             return "#00FF40";
@@ -271,18 +271,18 @@ d3.json("data/africaRev.geojson").then(geojson => {
         featureElement.attr("fill-opacity", function(d) {
           if (
             d.properties.name == "S. Sudan" ||
-            d.properties.name == "Mozambique" ||
-            d.properties.name == "Niger" ||
-            d.properties.name == "Dem. Rep. Congo" ||
+            // d.properties.name == "Mozambique" ||
+            // d.properties.name == "Niger" ||
+            // d.properties.name == "Dem. Rep. Congo" ||
             d.properties.name == "Chad" ||
-            d.properties.name == "Burkina Faso" ||
+            // d.properties.name == "Burkina Faso" ||
             d.properties.name == "Malawi" ||
-            d.properties.name == "Madagascar" ||
+            // d.properties.name == "Madagascar" ||
             d.properties.name == "Central African Rep." ||
-            d.properties.name == "Guinea-Bissau" ||
-            d.properties.name == "Sierra Leone" ||
-            d.properties.name == "Burundi" ||
-            d.properties.name == "Liberia"
+            // d.properties.name == "Guinea-Bissau" ||
+            // d.properties.name == "Sierra Leone" ||
+            d.properties.name == "Burundi"
+            // || d.properties.name == "Liberia"
           ) {
             return 0.7;
           } else {

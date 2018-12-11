@@ -219,7 +219,7 @@ let svg = (data, firstGraph, secondGraph) => {
         points.attr("class", d => {
           if (d.category == "sub" && d.access < 15) {
             return "active negative";
-          } else if (d.category == "sub" && d.access > 80) {
+          } else if (d.category == "sub" && d.access > 83) {
             return "active positive";
           } else {
             return "inactive";
