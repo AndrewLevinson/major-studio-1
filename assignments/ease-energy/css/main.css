@@ -461,6 +461,26 @@ strong {
   font-weight: 500;
 }
 
+.upper {
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+}
+
+.border {
+  border-bottom: 1px dashed #3d3d3d;
+  font-weight: 500;
+}
+
+.large-pos {
+  font-size: 110%;
+  border-bottom: 1px dashed var(--green-color);
+}
+
+.large-neg {
+  font-size: 110%;
+  border-bottom: 1px dashed var(--negative-color);
+}
+
 #analysis {
   min-height: 25vh;
 }

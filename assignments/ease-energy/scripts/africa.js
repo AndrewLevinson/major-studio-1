@@ -364,14 +364,14 @@ d3.json("data/africaRev.geojson").then(geojson => {
         </tbody>`;
 
           let analysisP = document.getElementById("analysis");
-          analysisP.innerHTML = `Let's put this in perspective...<br><br>In a single year, there's <span class="green"><strong>${numFormatT(
+          analysisP.innerHTML = `Let's put this in perspective...<br><br>In a single year, there's <span class="green large-pos"><strong>${numFormatT(
             ((d.properties.totaltwh / d.properties.areakm) * 1000000000) /
               (12000 * 78.69)
-          )}x</strong></span> more potential energy per square kilometer in <strong>${
+          )}x</strong></span> more potential solar + wind energy per square kilometer in <span class="border">${
             d.properties.name
-          }</strong> than the average US resident will use in their <strong>entire lifetime.</strong><br><br>And yet, they still only have <span class="negative">${
+          }</span> than the average US resident will use in their <strong class="upper">entire lifetime.</strong><br><br>And yet, they still only have <strong class="negative large-neg">${
             d.properties.access
-          }%</span> access to electricity.`;
+          }%</strong> access to electricity.`;
         });
         map.flyTo({
           // center: [18.7322, 15.4542], // chad
