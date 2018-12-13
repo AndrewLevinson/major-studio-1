@@ -1,18 +1,3 @@
-// to do
-// use score instead of index
-// scatter: highlight best and worst, not just worst 25%
-// -> highlight 25% <> 75% on map...consider new color palette. Avoid green and red. Maybe ixD?
-// svg responsive to screen re-sizing
-// overplotting: show less text pre-hover. Consider mobile
-// update link style
-// update axis ticks on < 950px
-// teaser graphic in intro/outro?
-// revise color palette
-// edit writing
-// footnotes and data sources
-// data gutcheck
-// readme w/ description and sources
-
 // load data
 const rawData = d3.csv("data/cleaned/master_cleaned.csv", d => {
   return {
@@ -183,6 +168,8 @@ let svg = (data, firstGraph, secondGraph) => {
     points.classed("up", false);
     points.classed("special", false);
   }
+
+  // graph-scroll library credit: http://1wheel.github.io/graph-scroll/
   d3.graphScroll()
     .container(d3.select(".container-2"))
     .graph(d3.selectAll(".container-2 #graph"))

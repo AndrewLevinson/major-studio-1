@@ -183,6 +183,7 @@ d3.json("data/africaRev.geojson").then(geojson => {
       .attr("fill-opacity", 0.5);
   }
 
+  // graph-scroll library credit: http://1wheel.github.io/graph-scroll/
   d3.graphScroll()
     .container(d3.select(".container-3"))
     .graph(d3.selectAll(".container-3 #graph"))
@@ -366,10 +367,10 @@ d3.json("data/africaRev.geojson").then(geojson => {
           let analysisP = document.getElementById("analysis");
           analysisP.innerHTML = `Let's put this in perspective...<br><br>In a single year, there's <span class="green large-pos"><strong>${numFormatT(
             ((d.properties.totaltwh / d.properties.areakm) * 1000000000) /
-              (12000 * 78.69)
+              (12984 * 78.69)
           )}x</strong></span> more potential solar + wind energy per square kilometer in <span class="border">${
             d.properties.name
-          }</span> than the average US resident will use in their <strong class="upper">entire lifetime.</strong><br><br>And yet, they still only have <strong class="negative large-neg">${
+          }</span> than the average US resident will use in their <strong class="upper">entire lifetime.</strong> <sup>[ 2 ]</sup> <sup>[ 3 ]</sup><br><br>And yet, they still only have <strong class="negative large-neg">${
             d.properties.access
           }%</strong> access to electricity.`;
         });
